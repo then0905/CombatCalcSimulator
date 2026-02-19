@@ -20,7 +20,6 @@
       {
         "SkillID": "Sword_1",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -48,7 +47,6 @@
       {
         "SkillID": "Sword_2",
         "SkillComponentID": "UpgradeSkill",
-        "DependCondition": "None",
         "EffectValue": 1.3,
         "EffectRecive": -1,
         "TargetCount": 1,
@@ -81,7 +79,6 @@
       {
         "SkillID": "Sword_3",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": -1,
         "TargetCount": 3
@@ -96,19 +93,17 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Sword_4_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Sword_4",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 0.1,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Rate",
@@ -128,19 +123,17 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Sword_5_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Sword_5",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 0.25,
         "InfluenceStatus": "MaxHP",
         "AddType": "Rate",
@@ -169,7 +162,6 @@
       {
         "SkillID": "Warrior_1",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 1.5,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -206,7 +198,6 @@
       {
         "SkillID": "Warrior_2",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": -1,
         "TargetCount": 3
@@ -214,7 +205,6 @@
       {
         "SkillID": "Warrior_2",
         "SkillComponentID": "Lunge",
-        "DependCondition": "None",
         "EffectRecive": -1,
         "TargetCount": 3,
         "Bonus": [
@@ -244,7 +234,6 @@
       {
         "SkillID": "Warrior_3",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 1.25,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -252,7 +241,6 @@
       {
         "SkillID": "Warrior_3",
         "SkillComponentID": "MultipleDamage",
-        "DependCondition": "None",
         "EffectValue": 1.25,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -260,7 +248,6 @@
       {
         "SkillID": "Warrior_3",
         "SkillComponentID": "MultipleDamage",
-        "DependCondition": "None",
         "EffectValue": 1.25,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -282,13 +269,11 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Warrior_4_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Warrior_4",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 6,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
@@ -312,13 +297,11 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Warrior_5_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Warrior_5",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 3,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -328,7 +311,6 @@
       {
         "SkillID": "Warrior_5",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 30,
         "InfluenceStatus": "MaxHP",
         "AddType": "Value",
@@ -345,19 +327,17 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Warrior_6_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Warrior_6",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 0.2,
         "InfluenceStatus": "MeleeHit",
         "AddType": "Rate",
@@ -371,7 +351,6 @@
       {
         "SkillID": "Warrior_6",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 8,
         "InfluenceStatus": "MeleeHit",
         "AddType": "Value",
@@ -392,19 +371,17 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Warrior_7_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Warrior_7",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 3,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -413,7 +390,6 @@
       {
         "SkillID": "Warrior_7",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 20,
         "InfluenceStatus": "MaxHP",
         "AddType": "Value",
@@ -442,7 +418,6 @@
       {
         "SkillID": "Knight_1",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 1.2,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -464,7 +439,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Knight_2_Intro",
     "SkillOperationDataList": [
       {
@@ -496,13 +470,11 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Knight_3_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Knight_3",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 5,
         "InfluenceStatus": "ATK",
         "AddType": "Value",
@@ -516,7 +488,6 @@
       {
         "SkillID": "Knight_3",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 5,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -544,13 +515,11 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Knight_4_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Knight_4",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 50,
         "InfluenceStatus": "MaxHP",
         "AddType": "Value",
@@ -564,7 +533,6 @@
       {
         "SkillID": "Knight_4",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 0.25,
         "InfluenceStatus": "HP_Recovery",
         "AddType": "Value",
@@ -598,7 +566,6 @@
       {
         "SkillID": "Knight_5",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 1.13,
         "ConditionOR": [
           "EquipLeft_Shield"
@@ -630,19 +597,17 @@
     "CastMage": 0,
     "CD": 0,
     "AnimaTrigger": 6,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Knight_6_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Knight_6",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 0.1,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Rate",
@@ -655,7 +620,6 @@
       {
         "SkillID": "Knight_6",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 5,
         "InfluenceStatus": "MeleeHit",
         "AddType": "Value",
@@ -676,19 +640,17 @@
     "CastMage": 0,
     "CD": 0,
     "AnimaTrigger": 7,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Knight_7_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Knight_7",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 10,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -700,7 +662,6 @@
       {
         "SkillID": "Knight_7",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 0.15,
         "InfluenceStatus": "BlockRate",
         "AddType": "Value",
@@ -712,7 +673,6 @@
       {
         "SkillID": "Knight_7",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": -0.25,
         "InfluenceStatus": "AS",
         "AddType": "Value",
@@ -732,19 +692,17 @@
     "CastMage": 0,
     "CD": 0,
     "AnimaTrigger": 8,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Knight_8_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Knight_8",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 12,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -756,7 +714,6 @@
       {
         "SkillID": "Knight_8",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": -0.25,
         "InfluenceStatus": "Speed",
         "AddType": "Value",
@@ -788,7 +745,6 @@
       {
         "SkillID": "Berserker_1",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 1.8,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -825,7 +781,6 @@
       {
         "SkillID": "Berserker_2",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 1.35,
         "EffectRecive": -1,
         "TargetCount": 5
@@ -864,7 +819,6 @@
       {
         "SkillID": "Berserker_3",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 1.55,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -872,7 +826,6 @@
       {
         "SkillID": "Berserker_3",
         "SkillComponentID": "MultipleDamage",
-        "DependCondition": "None",
         "EffectValue": 1.55,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -880,7 +833,6 @@
       {
         "SkillID": "Berserker_3",
         "SkillComponentID": "MultipleDamage",
-        "DependCondition": "None",
         "EffectValue": 1.55,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -913,13 +865,11 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Berserker_4_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Berserker_4",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 12,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
@@ -929,7 +879,6 @@
       {
         "SkillID": "Berserker_4",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 8,
         "InfluenceStatus": "MeleeHit",
         "AddType": "Value",
@@ -939,8 +888,7 @@
       {
         "SkillID": "Berserker_4",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
-        "EffectValue": 0.2,
+        "EffectValue": 12,
         "InfluenceStatus": "Crt",
         "AddType": "Value",
         "EffectDurationTime": 180,
@@ -963,13 +911,11 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Berserker_5_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Berserker_5",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 1.8,
         "InfluenceStatus": "IncreaseDmg",
         "AddType": "Rate",
@@ -979,7 +925,6 @@
       {
         "SkillID": "Berserker_5",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 20,
         "InfluenceStatus": "RecoveryDmg",
         "AddType": "Value",
@@ -996,19 +941,17 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Berserker_6_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Berserker_6",
         "SkillComponentID": "AdditiveBuff",
-        "DependCondition": "None",
         "EffectValue": 0.02,
         "InfluenceStatus": "IncreaseMeleeRange",
         "AddType": "Value",
@@ -1028,19 +971,17 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Berserker_7_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Berserker_7",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 15,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
@@ -1054,7 +995,6 @@
       {
         "SkillID": "Berserker_7",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 0.05,
         "InfluenceStatus": "AS",
         "AddType": "Value",
@@ -1075,19 +1015,17 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Berserker_8_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Berserker_8",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 10,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -1096,7 +1034,6 @@
       {
         "SkillID": "Berserker_8",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 120,
         "InfluenceStatus": "MaxHP",
         "AddType": "Value",
@@ -1105,7 +1042,6 @@
       {
         "SkillID": "Berserker_8",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 10,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -1121,7 +1057,6 @@
       {
         "SkillID": "Berserker_8",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 120,
         "InfluenceStatus": "MaxHP",
         "AddType": "Value",
@@ -1157,7 +1092,6 @@
       {
         "SkillID": "Berserker_9",
         "SkillComponentID": "Utility",
-        "DependCondition": "None",
         "InfluenceStatus": "RemoveAdditive",
         "ConditionOR": [
           "Stack_Berserker_6"
@@ -1212,13 +1146,11 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Berserker_10_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Berserker_10",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 25,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
@@ -1231,7 +1163,6 @@
       {
         "SkillID": "Berserker_10",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 1,
         "InfluenceStatus": "AS",
         "AddType": "Value",
@@ -1264,14 +1195,12 @@
       {
         "SkillID": "Berserker_11",
         "SkillComponentID": "Channeled",
-        "DependCondition": "None",
         "EffectRecive": -1,
         "TargetCount": 5
       },
       {
         "SkillID": "Berserker_11",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 1.3,
         "EffectRecive": -1,
         "TargetCount": 5
@@ -1299,7 +1228,6 @@
       {
         "SkillID": "Berserker_12",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 1.4,
         "EffectRecive": 1,
         "TargetCount": 1
@@ -1330,13 +1258,11 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Berserker_13_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Berserker_13",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 0.5,
         "InfluenceStatus": "Speed",
         "AddType": "Value",
@@ -1363,13 +1289,11 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Berserker_14_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Berserker_14",
         "SkillComponentID": "Utility",
-        "DependCondition": "None",
         "InfluenceStatus": "RemoveAllCC",
         "EffectRecive": 0
       }
@@ -1396,7 +1320,6 @@
       {
         "SkillID": "Berserker_15",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 2.5,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -1411,46 +1334,43 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Berserker_16_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Berserker_16",
+        "SkillComponentID": "PassiveBuff"
+      },
+      {
+        "SkillID": "Berserker_16",
+        "SkillComponentID": "EventTrigger"
+      },
+      {
+        "SkillID": "Berserker_16",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 10,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
         "ConditionOR": [
           "InCombatStatus_True"
         ],
-        "EffectDurationTime": 1.5,
-        "EffectRecive": 0,
-        "Bonus": [
-          "Subscription"
-        ]
+        "EffectDurationTime": 1.5
       },
       {
         "SkillID": "Berserker_16",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 0.8,
         "InfluenceStatus": "AS",
         "AddType": "Value",
         "ConditionOR": [
           "InCombatStatus_True"
         ],
-        "EffectDurationTime": 1.5,
-        "EffectRecive": 0,
-        "Bonus": [
-          "Subscription"
-        ]
+        "EffectDurationTime": 1.5
       }
     ]
   },
@@ -1475,7 +1395,6 @@
       {
         "SkillID": "Paladin_1",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 1.35,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -1506,7 +1425,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Paladin_2_Intro",
     "SkillOperationDataList": [
       {
@@ -1553,13 +1471,11 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Paladin_3_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Paladin_3",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 8,
         "InfluenceStatus": "ATK",
         "AddType": "Value",
@@ -1570,7 +1486,6 @@
       {
         "SkillID": "Paladin_3",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 0.25,
         "InfluenceStatus": "AS",
         "AddType": "Value",
@@ -1581,7 +1496,6 @@
       {
         "SkillID": "Paladin_3",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 0.5,
         "InfluenceStatus": "Speed",
         "AddType": "Value",
@@ -1606,13 +1520,11 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Paladin_4_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Paladin_4",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 8,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -1623,7 +1535,6 @@
       {
         "SkillID": "Paladin_4",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 15,
         "InfluenceStatus": "Avoid",
         "AddType": "Value",
@@ -1634,7 +1545,6 @@
       {
         "SkillID": "Paladin_4",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 80,
         "InfluenceStatus": "MaxHP",
         "AddType": "Value",
@@ -1645,7 +1555,6 @@
       {
         "SkillID": "Paladin_4",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 0.35,
         "InfluenceStatus": "Recovery_HP",
         "AddType": "Value",
@@ -1670,13 +1579,11 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Paladin_5_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Paladin_5",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 0.25,
         "InfluenceStatus": "TransferDmg",
         "AddType": "Rate",
@@ -1687,7 +1594,6 @@
       {
         "SkillID": "Paladin_5",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 0,
         "InfluenceStatus": "BeTransferDmg",
         "AddType": "Value",
@@ -1718,7 +1624,6 @@
       {
         "SkillID": "Paladin_6",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 1.3,
         "ConditionOR": [
           "EquipWeapon_Shield"
@@ -1768,13 +1673,11 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Paladin_7_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Paladin_7",
         "SkillComponentID": "Health",
-        "DependCondition": "None",
         "EffectValue": 1.25,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Rate",
@@ -1804,13 +1707,11 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Paladin_8_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Paladin_8",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 3,
         "InfluenceStatus": "HolyDamage",
         "AddType": "Value",
@@ -1844,7 +1745,6 @@
       {
         "SkillID": "Paladin_9",
         "SkillComponentID": "Charge",
-        "DependCondition": "None",
         "ConditionOR": [
           "EquipWeapon_Shield"
         ],
@@ -1866,7 +1766,6 @@
       {
         "SkillID": "Paladin_9",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 1.15,
         "ConditionOR": [
           "EquipWeapon_Shield"
@@ -1884,19 +1783,17 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Paladin_10_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Paladin_10",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 5,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
@@ -1910,7 +1807,6 @@
       {
         "SkillID": "Paladin_10",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 5,
         "InfluenceStatus": "MeleeHit",
         "AddType": "Value",
@@ -1931,19 +1827,17 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Paladin_11_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Paladin_11",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 8,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -1956,8 +1850,7 @@
       {
         "SkillID": "Paladin_11",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
-        "EffectValue": 0.2,
+        "EffectValue": 20,
         "InfluenceStatus": "BlockRate",
         "AddType": "Value",
         "ConditionOR": [
@@ -1969,7 +1862,6 @@
       {
         "SkillID": "Paladin_11",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": -0.2,
         "InfluenceStatus": "AS",
         "AddType": "Value",
@@ -1989,19 +1881,17 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Paladin_12_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Paladin_12",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 15,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -2014,7 +1904,6 @@
       {
         "SkillID": "Paladin_12",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": -0.8,
         "InfluenceStatus": "Speed",
         "AddType": "Value",
@@ -2034,19 +1923,17 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Paladin_13_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Paladin_13",
         "SkillComponentID": "EnhanceSkill",
-        "DependCondition": "None",
         "EffectRecive": -1,
         "TargetCount": 1,
         "Bonus": [
@@ -2077,19 +1964,17 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Paladin_14_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Paladin_14",
         "SkillComponentID": "EnhanceSkill",
-        "DependCondition": "None",
         "EffectRecive": -2,
         "TargetCount": 1,
         "Bonus": [
@@ -2099,7 +1984,6 @@
       {
         "SkillID": "Paladin_14",
         "SkillComponentID": "Utility",
-        "DependCondition": "None",
         "InfluenceStatus": "RemoveCC",
         "ConditionOR": [
           "EquipWeapon_Shield"
@@ -2117,19 +2001,17 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Paladin_15_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Paladin_15",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 0.3,
         "InfluenceStatus": "ReduceDmg",
         "AddType": "Rate",
@@ -2149,28 +2031,32 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Paladin_16_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Paladin_16",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
+        "ConditionOR": [
+          "EquipWeapon_Shield"
+        ]
+      },
+      {
+        "SkillID": "Paladin_16",
+        "SkillComponentID": "EventTrigger"
+      },
+      {
+        "SkillID": "Paladin_16",
+        "SkillComponentID": "ContinuanceBuff",
         "EffectValue": 0.75,
         "InfluenceStatus": "ReduceCCTime",
         "AddType": "Rate",
-        "ConditionOR": [
-          "EquipWeapon_Shield"
-        ],
-        "EffectDurationTime": 5,
-        "EffectRecive": 0,
-        "TargetCount": 0
+        "EffectDurationTime": 5
       }
     ]
   },
@@ -2190,13 +2076,11 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Paladin_17_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Paladin_17",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 0,
         "InfluenceStatus": "ReduceDmg",
         "AddType": "Rate",
@@ -2230,7 +2114,6 @@
       {
         "SkillID": "Praetorian_1",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 1.5,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -2239,8 +2122,8 @@
         "SkillID": "Praetorian_1",
         "SkillComponentID": "Debuff",
         "DependCondition": "Prev",
-        "EffectValue": 8,
-        "InfluenceStatus": "BreakDEF",
+        "EffectValue": 15,
+        "InfluenceStatus": "ArmorBreak",
         "AddType": "Value",
         "EffectDurationTime": 2,
         "EffectRecive": -1,
@@ -2269,7 +2152,6 @@
       {
         "SkillID": "Praetorian_2",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 1.4,
         "EffectRecive": -1,
         "TargetCount": 3
@@ -2278,8 +2160,8 @@
         "SkillID": "Praetorian_2",
         "SkillComponentID": "Debuff",
         "DependCondition": "Prev",
-        "EffectValue": 5,
-        "InfluenceStatus": "Bleed",
+        "EffectValue": 18,
+        "InfluenceStatus": "Bleeding",
         "AddType": "Value",
         "EffectDurationTime": 5,
         "EffectRecive": -1,
@@ -2308,8 +2190,7 @@
       {
         "SkillID": "Praetorian_3",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
-        "EffectValue": 1.25,
+        "EffectValue": 1.1,
         "InfluenceStatus": "IncreaseDmg",
         "AddType": "Rate",
         "EffectRecive": -1,
@@ -2318,8 +2199,8 @@
       {
         "SkillID": "Praetorian_3",
         "SkillComponentID": "MultipleDamage",
-        "DependCondition": "None",
-        "EffectValue": 1.35,
+        "DependCondition": "Prev",
+        "EffectValue": 1.2,
         "InfluenceStatus": "IncreaseDmg",
         "AddType": "Rate",
         "EffectRecive": -1,
@@ -2328,8 +2209,8 @@
       {
         "SkillID": "Praetorian_3",
         "SkillComponentID": "MultipleDamage",
-        "DependCondition": "None",
-        "EffectValue": 1.45,
+        "DependCondition": "All",
+        "EffectValue": 1.3,
         "InfluenceStatus": "IncreaseDmg",
         "AddType": "Rate",
         "EffectRecive": -1,
@@ -2352,13 +2233,11 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Praetorian_4_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Praetorian_4",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 1.25,
         "InfluenceStatus": "Speed",
         "AddType": "Value",
@@ -2369,7 +2248,6 @@
       {
         "SkillID": "Praetorian_4",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 0.23,
         "InfluenceStatus": "AS",
         "AddType": "Value",
@@ -2380,8 +2258,7 @@
       {
         "SkillID": "Praetorian_4",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
-        "EffectValue": 0.18,
+        "EffectValue": 10,
         "InfluenceStatus": "Crt",
         "AddType": "Value",
         "EffectDurationTime": 180,
@@ -2405,16 +2282,14 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Praetorian_5_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Praetorian_5",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
-        "EffectValue": 0.7,
+        "EffectValue": 30,
         "InfluenceStatus": "DisorderResistance",
-        "AddType": "Rate",
+        "AddType": "Value",
         "EffectDurationTime": 180,
         "EffectRecive": 0,
         "TargetCount": 0
@@ -2436,22 +2311,17 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Praetorian_6_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Praetorian_6",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 5,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
         "ConditionOR": [
           "EquipWeapon_Shield"
         ],
-        "ConditionAND": [
-          "Equip_Shield"
-        ],
         "EffectDurationTime": 180,
         "EffectRecive": 0,
         "TargetCount": 0
@@ -2459,16 +2329,12 @@
       {
         "SkillID": "Praetorian_6",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 5,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
         "ConditionOR": [
           "EquipWeapon_Shield"
         ],
-        "ConditionAND": [
-          "Equip_Shield"
-        ],
         "EffectDurationTime": 180,
         "EffectRecive": 0,
         "TargetCount": 0
@@ -2476,15 +2342,11 @@
       {
         "SkillID": "Praetorian_6",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
         "EffectValue": 0.15,
         "InfluenceStatus": "BlockRate",
         "AddType": "Value",
         "ConditionOR": [
           "EquipWeapon_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
         ],
         "EffectDurationTime": 180,
         "EffectRecive": 0,
@@ -2513,30 +2375,17 @@
       {
         "SkillID": "Praetorian_7",
         "SkillComponentID": "Charge",
-        "DependCondition": "None",
         "EffectRecive": 0,
         "TargetCount": 0
       },
       {
         "SkillID": "Praetorian_7",
         "SkillComponentID": "InheritDamage",
-        "DependCondition": "None",
         "EffectRecive": -1,
         "TargetCount": -2,
         "Bonus": [
           "Praetorian_1"
         ]
-      },
-      {
-        "SkillID": "Praetorian_7",
-        "SkillComponentID": "Debuff",
-        "DependCondition": "Prev",
-        "EffectValue": 8,
-        "InfluenceStatus": "BreakDEF",
-        "AddType": "Value",
-        "EffectDurationTime": 2,
-        "EffectRecive": -1,
-        "TargetCount": -2
       }
     ]
   },
@@ -2548,19 +2397,17 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Praetorian_8_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Praetorian_8",
         "SkillComponentID": "EnhanceSkill",
-        "DependCondition": "None",
         "EffectRecive": -1,
         "TargetCount": 0,
         "Bonus": [
@@ -2570,7 +2417,6 @@
       {
         "SkillID": "Praetorian_8",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 0.1,
         "InfluenceStatus": "EffectValue",
         "AddType": "Value",
@@ -2580,7 +2426,6 @@
       {
         "SkillID": "Praetorian_8",
         "SkillComponentID": "EnhanceSkill",
-        "DependCondition": "None",
         "EffectRecive": 0,
         "TargetCount": 0,
         "Bonus": [
@@ -2590,7 +2435,6 @@
       {
         "SkillID": "Praetorian_8",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 0.5,
         "InfluenceStatus": "HitReduceSec",
         "EffectRecive": 0,
@@ -2606,27 +2450,22 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Praetorian_9_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Praetorian_9",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 8,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
         "ConditionOR": [
           "EquipWeapon_OneHandedSword"
-        ],
-        "ConditionAND": [
-          "Equip_OneHandedSword"
         ],
         "EffectRecive": 0,
         "TargetCount": 0
@@ -2634,15 +2473,11 @@
       {
         "SkillID": "Praetorian_9",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 0.35,
         "InfluenceStatus": "AS",
         "AddType": "Value",
         "ConditionOR": [
-          "EquipWeaponEquipWeapon_OneHandedSword"
-        ],
-        "ConditionAND": [
-          "Equip_OneHandedSword"
+          "EquipWeapon_OneHandedSword"
         ],
         "EffectRecive": 0,
         "TargetCount": 0
@@ -2657,27 +2492,22 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Praetorian_10_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Praetorian_10",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 5,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
         "ConditionOR": [
           "EquipWeapon_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
         ],
         "EffectRecive": 0,
         "TargetCount": 0
@@ -2685,15 +2515,11 @@
       {
         "SkillID": "Praetorian_10",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
-        "EffectValue": 0.12,
+        "EffectValue": 12,
         "InfluenceStatus": "BlockRate",
         "AddType": "Value",
         "ConditionOR": [
           "EquipWeapon_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
         ],
         "EffectRecive": 0,
         "TargetCount": 0
@@ -2708,19 +2534,17 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Praetorian_11_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Praetorian_11",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 7,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -2728,27 +2552,18 @@
           "EquipArmor_LightArmor",
           "EquipArmor_ClothArmor"
         ],
-        "ConditionAND": [
-          "Equip_LightArmor",
-          "Equip_ClothArmor"
-        ],
         "EffectRecive": 0,
         "TargetCount": 0
       },
       {
         "SkillID": "Praetorian_11",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 0.45,
         "InfluenceStatus": "Speed",
         "AddType": "Value",
         "ConditionOR": [
           "EquipArmor_LightArmor",
           "EquipArmor_ClothArmor"
-        ],
-        "ConditionAND": [
-          "Equip_LightArmor",
-          "Equip_ClothArmor"
         ],
         "EffectRecive": 0,
         "TargetCount": 0
@@ -2763,25 +2578,32 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Praetorian_12_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Praetorian_12",
-        "SkillComponentID": "InheritDamage",
-        "DependCondition": "None",
+        "SkillComponentID": "PassiveBuff",
+        "EffectRecive": 0,
+        "TargetCount": 0
+      },
+      {
+        "SkillID": "Praetorian_12",
+        "SkillComponentID": "EventTrigger",
         "ConditionOR": [
           "Block_0.35"
         ],
-        "ConditionAND": [
-          "Block_0.35"
-        ],
+        "EffectRecive": 0,
+        "TargetCount": 0
+      },
+      {
+        "SkillID": "Praetorian_12",
+        "SkillComponentID": "InheritDamage",
         "EffectRecive": 0,
         "TargetCount": 0,
         "Bonus": [
@@ -2798,19 +2620,17 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Praetorian_13_Intro",
     "SkillOperationDataList": [
       {
         "SkillID": "Praetorian_13",
         "SkillComponentID": "EnhanceSkill",
-        "DependCondition": "None",
         "AddType": "Vlaue",
         "EffectRecive": 0,
         "TargetCount": 0,
@@ -2821,7 +2641,6 @@
       {
         "SkillID": "Praetorian_13",
         "SkillComponentID": "PassiveBuff",
-        "DependCondition": "None",
         "EffectValue": 1,
         "InfluenceStatus": "Distance",
         "AddType": "Vlaue",
@@ -2831,7 +2650,6 @@
       {
         "SkillID": "Praetorian_13",
         "SkillComponentID": "Charge",
-        "DependCondition": "None",
         "EffectRecive": 0,
         "TargetCount": 0
       }
@@ -2859,7 +2677,6 @@
       {
         "SkillID": "Praetorian_14",
         "SkillComponentID": "DotDamage",
-        "DependCondition": "None",
         "EffectValue": 1.85,
         "EffectDurationTime": 5,
         "EffectRecive": -1,
@@ -2888,7 +2705,6 @@
       {
         "SkillID": "Praetorian_15",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 1.7,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -2928,7 +2744,6 @@
       {
         "SkillID": "Praetorian_16",
         "SkillComponentID": "Damage",
-        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": 1,
         "TargetCount": 1
@@ -2936,7 +2751,6 @@
       {
         "SkillID": "Praetorian_16",
         "SkillComponentID": "MultipleDamage",
-        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": 1,
         "TargetCount": 1
@@ -2944,7 +2758,6 @@
       {
         "SkillID": "Praetorian_16",
         "SkillComponentID": "MultipleDamage",
-        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": 1,
         "TargetCount": 1
@@ -2952,7 +2765,6 @@
       {
         "SkillID": "Praetorian_16",
         "SkillComponentID": "MultipleDamage",
-        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": 1,
         "TargetCount": 1
@@ -2960,7 +2772,6 @@
       {
         "SkillID": "Praetorian_16",
         "SkillComponentID": "MultipleDamage",
-        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": 1,
         "TargetCount": 1
@@ -2968,7 +2779,6 @@
       {
         "SkillID": "Praetorian_16",
         "SkillComponentID": "MultipleDamage",
-        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": 1,
         "TargetCount": 1
@@ -2976,7 +2786,6 @@
       {
         "SkillID": "Praetorian_16",
         "SkillComponentID": "MultipleDamage",
-        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": 1,
         "TargetCount": 1
@@ -2984,7 +2793,6 @@
       {
         "SkillID": "Praetorian_16",
         "SkillComponentID": "MultipleDamage",
-        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": 1,
         "TargetCount": 1
@@ -3105,13 +2913,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Mage_5_Intro",
     "SkillOperationDataList": [
       {
@@ -3128,13 +2935,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Mage_6_Intro",
     "SkillOperationDataList": [
       {
@@ -3158,7 +2964,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Monk_1_Intro",
     "SkillOperationDataList": [
       {
@@ -3182,7 +2987,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Monk_2_Intro",
     "SkillOperationDataList": [
       {
@@ -3254,7 +3058,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Monk_5_Intro",
     "SkillOperationDataList": [
       {
@@ -3278,7 +3081,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Monk_6_Intro",
     "SkillOperationDataList": [
       {
@@ -3295,13 +3097,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Monk_7_Intro",
     "SkillOperationDataList": [
       {
@@ -3318,13 +3119,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Monk_8_Intro",
     "SkillOperationDataList": [
       {
@@ -3444,7 +3244,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Wizard_5_Intro",
     "SkillOperationDataList": [
       {
@@ -3461,13 +3260,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Wizard_6_Intro",
     "SkillOperationDataList": [
       {
@@ -3484,13 +3282,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Wizard_7_Intro",
     "SkillOperationDataList": [
       {
@@ -3514,7 +3311,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Wizard_8_Intro",
     "SkillOperationDataList": [
       {
@@ -3538,7 +3334,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Priest_1_Intro",
     "SkillOperationDataList": [
       {
@@ -3562,7 +3357,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Priest_2_Intro",
     "SkillOperationDataList": [
       {
@@ -3586,7 +3380,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Priest_3_Intro",
     "SkillOperationDataList": [
       {
@@ -3658,7 +3451,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Priest_6_Intro",
     "SkillOperationDataList": [
       {
@@ -3682,7 +3474,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Priest_7_Intro",
     "SkillOperationDataList": [
       {
@@ -3699,13 +3490,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Priest_8_Intro",
     "SkillOperationDataList": [
       {
@@ -3722,13 +3512,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Priest_9_Intro",
     "SkillOperationDataList": [
       {
@@ -3752,7 +3541,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Priest_10_Intro",
     "SkillOperationDataList": [
       {
@@ -3776,7 +3564,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Priest_11_Intro",
     "SkillOperationDataList": [
       {
@@ -3800,7 +3587,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Priest_12_Intro",
     "SkillOperationDataList": [
       {
@@ -3824,7 +3610,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Priest_13_Intro",
     "SkillOperationDataList": [
       {
@@ -3841,13 +3626,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Priest_14_Intro",
     "SkillOperationDataList": [
       {
@@ -3871,7 +3655,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Priest_15_Intro",
     "SkillOperationDataList": [
       {
@@ -4015,7 +3798,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Magister_5_Intro",
     "SkillOperationDataList": [
       {
@@ -4039,7 +3821,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Magister_6_Intro",
     "SkillOperationDataList": [
       {
@@ -4056,13 +3837,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Magister_7_Intro",
     "SkillOperationDataList": [
       {
@@ -4079,13 +3859,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Magister_8_Intro",
     "SkillOperationDataList": [
       {
@@ -4133,7 +3912,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Magister_10_Intro",
     "SkillOperationDataList": [
       {
@@ -4157,7 +3935,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Magister_11_Intro",
     "SkillOperationDataList": [
       {
@@ -4174,13 +3951,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Magister_12_Intro",
     "SkillOperationDataList": [
       {
@@ -4228,7 +4004,6 @@
     "Height": 0,
     "CircleDistance": 15,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Magister_14_Intro",
     "SkillOperationDataList": [
       {
@@ -4317,13 +4092,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Prophet_3_Intro",
     "SkillOperationDataList": [
       {
@@ -4371,7 +4145,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Prophet_5_Intro",
     "SkillOperationDataList": [
       {
@@ -4395,7 +4168,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Prophet_6_Intro",
     "SkillOperationDataList": [
       {
@@ -4419,7 +4191,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Prophet_7_Intro",
     "SkillOperationDataList": [
       {
@@ -4467,7 +4238,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Prophet_9_Intro",
     "SkillOperationDataList": [
       {
@@ -4491,7 +4261,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Prophet_10_Intro",
     "SkillOperationDataList": [
       {
@@ -4515,7 +4284,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Prophet_11_Intro",
     "SkillOperationDataList": [
       {
@@ -4532,13 +4300,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Prophet_12_Intro",
     "SkillOperationDataList": [
       {
@@ -4634,7 +4401,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Prophet_16_Intro",
     "SkillOperationDataList": [
       {
@@ -4747,13 +4513,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Archer_4_Intro",
     "SkillOperationDataList": [
       {
@@ -4770,13 +4535,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Archer_5_Intro",
     "SkillOperationDataList": [
       {
@@ -4793,13 +4557,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Shooter_1_Intro",
     "SkillOperationDataList": [
       {
@@ -4919,7 +4682,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Shooter_6_Intro",
     "SkillOperationDataList": [
       {
@@ -4960,13 +4722,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Shooter_8_Intro",
     "SkillOperationDataList": [
       {
@@ -4983,13 +4744,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Shooter_9_Intro",
     "SkillOperationDataList": [
       {
@@ -5006,13 +4766,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Shooter_10_Intro",
     "SkillOperationDataList": [
       {
@@ -5030,13 +4789,12 @@
     "CastMage": 0,
     "CD": 0,
     "AnimaTrigger": 1,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hunter_1_Intro",
     "SkillOperationDataList": [
       {
@@ -5060,7 +4818,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hunter_2_Intro",
     "SkillOperationDataList": [
       {
@@ -5108,7 +4865,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hunter_4_Intro",
     "SkillOperationDataList": [
       {
@@ -5204,7 +4960,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hunter_8_Intro",
     "SkillOperationDataList": [
       {
@@ -5228,7 +4983,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hunter_9_Intro",
     "SkillOperationDataList": [
       {
@@ -5252,7 +5006,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hunter_10_Intro",
     "SkillOperationDataList": [
       {
@@ -5293,13 +5046,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hunter_12_Intro",
     "SkillOperationDataList": [
       {
@@ -5316,13 +5068,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hunter_13_Intro",
     "SkillOperationDataList": [
       {
@@ -5339,13 +5090,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hunter_14_Intro",
     "SkillOperationDataList": [
       {
@@ -5369,7 +5119,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hunter_15_Intro",
     "SkillOperationDataList": [
       {
@@ -5386,13 +5135,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Marksman_1_Intro",
     "SkillOperationDataList": [
       {
@@ -5512,7 +5260,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Marksman_6_Intro",
     "SkillOperationDataList": [
       {
@@ -5553,13 +5300,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Marksman_8_Intro",
     "SkillOperationDataList": [
       {
@@ -5576,13 +5322,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Marksman_9_Intro",
     "SkillOperationDataList": [
       {
@@ -5599,13 +5344,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Marksman_10_Intro",
     "SkillOperationDataList": [
       {
@@ -5629,7 +5373,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Marksman_11_Intro",
     "SkillOperationDataList": [
       {
@@ -5653,7 +5396,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Marksman_12_Intro",
     "SkillOperationDataList": [
       {
@@ -5718,13 +5460,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Marksman_15_Intro",
     "SkillOperationDataList": [
       {
@@ -5796,7 +5537,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 2,
-    "AdditionMode": "None",
     "Intro": "TM_Marksman_18_Intro",
     "SkillOperationDataList": [
       {
@@ -5837,13 +5577,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Chaser_1_Intro",
     "SkillOperationDataList": [
       {
@@ -5867,7 +5606,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Chaser_2_Intro",
     "SkillOperationDataList": [
       {
@@ -5915,7 +5653,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Chaser_4_Intro",
     "SkillOperationDataList": [
       {
@@ -6011,7 +5748,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Chaser_8_Intro",
     "SkillOperationDataList": [
       {
@@ -6035,7 +5771,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Chaser_9_Intro",
     "SkillOperationDataList": [
       {
@@ -6059,7 +5794,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Chaser_10_Intro",
     "SkillOperationDataList": [
       {
@@ -6155,7 +5889,6 @@
     "Height": 0,
     "CircleDistance": 8,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Chaser_14_Intro",
     "SkillOperationDataList": [
       {
@@ -6179,7 +5912,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Chaser_15_Intro",
     "SkillOperationDataList": [
       {
@@ -6227,7 +5959,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Chaser_17_Intro",
     "SkillOperationDataList": [
       {
@@ -6244,13 +5975,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Chaser_18_Intro",
     "SkillOperationDataList": [
       {
@@ -6267,13 +5997,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Chaser_19_Intro",
     "SkillOperationDataList": [
       {
@@ -6290,13 +6019,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Chaser_20_Intro",
     "SkillOperationDataList": [
       {
@@ -6313,13 +6041,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Chaser_21_Intro",
     "SkillOperationDataList": [
       {
@@ -6343,7 +6070,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Chaser_22_Intro",
     "SkillOperationDataList": [
       {
@@ -6408,13 +6134,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Rogue_3_Intro",
     "SkillOperationDataList": [
       {
@@ -6431,13 +6156,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Rogue_4_Intro",
     "SkillOperationDataList": [
       {
@@ -6454,13 +6178,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Rogue_5_Intro",
     "SkillOperationDataList": [
       {
@@ -6477,13 +6200,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Ranger_1_Intro",
     "SkillOperationDataList": [
       {
@@ -6500,13 +6222,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Ranger_2_Intro",
     "SkillOperationDataList": [
       {
@@ -6602,7 +6323,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Ranger_6_Intro",
     "SkillOperationDataList": [
       {
@@ -6619,13 +6339,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Ranger_7_Intro",
     "SkillOperationDataList": [
       {
@@ -6690,13 +6409,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Thieves_1_Intro",
     "SkillOperationDataList": [
       {
@@ -6713,13 +6431,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Thieves_2_Intro",
     "SkillOperationDataList": [
       {
@@ -6767,7 +6484,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Thieves_4_Intro",
     "SkillOperationDataList": [
       {
@@ -6808,13 +6524,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Thieves_6_Intro",
     "SkillOperationDataList": [
       {
@@ -6879,13 +6594,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Thieves_9_Intro",
     "SkillOperationDataList": [
       {
@@ -6902,13 +6616,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Swashbuckler_1_Intro",
     "SkillOperationDataList": [
       {
@@ -6925,13 +6638,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Swashbuckler_2_Intro",
     "SkillOperationDataList": [
       {
@@ -7027,7 +6739,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Swashbuckler_6_Intro",
     "SkillOperationDataList": [
       {
@@ -7044,13 +6755,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Swashbuckler_7_Intro",
     "SkillOperationDataList": [
       {
@@ -7122,7 +6832,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Swashbuckler_10_Intro",
     "SkillOperationDataList": [
       {
@@ -7146,7 +6855,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Swashbuckler_11_Intro",
     "SkillOperationDataList": [
       {
@@ -7163,13 +6871,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Swashbuckler_12_Intro",
     "SkillOperationDataList": [
       {
@@ -7193,7 +6900,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Swashbuckler_13_Intro",
     "SkillOperationDataList": [
       {
@@ -7306,13 +7012,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Assassin_1_Intro",
     "SkillOperationDataList": [
       {
@@ -7329,13 +7034,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Assassin_2_Intro",
     "SkillOperationDataList": [
       {
@@ -7383,7 +7087,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Assassin_4_Intro",
     "SkillOperationDataList": [
       {
@@ -7424,13 +7127,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Assassin_6_Intro",
     "SkillOperationDataList": [
       {
@@ -7495,13 +7197,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Assassin_9_Intro",
     "SkillOperationDataList": [
       {
@@ -7645,7 +7346,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Assassin_15_Intro",
     "SkillOperationDataList": [
       {
@@ -7686,13 +7386,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Assassin_17_Intro",
     "SkillOperationDataList": [
       {
@@ -7709,13 +7408,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Battlemage_1_Intro"
   },
   {
@@ -7726,13 +7424,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Battlemage_2_Intro"
   },
   {
@@ -7786,7 +7483,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Battlemage_5_Intro"
   },
   {
@@ -7804,7 +7500,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Battlemage_6_Intro"
   },
   {
@@ -7923,13 +7618,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Battlemage_13_Intro"
   },
   {
@@ -7983,7 +7677,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Battlemage_16_Intro"
   },
   {
@@ -7994,13 +7687,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Battlemage_17_Intro"
   },
   {
@@ -8011,13 +7703,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Dragonknight_1_Intro"
   },
   {
@@ -8028,13 +7719,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Dragonknight_2_Intro"
   },
   {
@@ -8045,13 +7735,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Dragonknight_3_Intro"
   },
   {
@@ -8087,7 +7776,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 1.35,
-    "AdditionMode": "None",
     "Intro": "TM_Dragonknight_6_Intro"
   },
   {
@@ -8177,7 +7865,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Dragonknight_11_Intro"
   },
   {
@@ -8195,7 +7882,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Dragonknight_12_Intro"
   },
   {
@@ -8249,7 +7935,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Dragonknight_15_Intro"
   },
   {
@@ -8296,13 +7981,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Dragonknight_18_Intro"
   },
   {
@@ -8331,13 +8015,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Archangel_1_Intro"
   },
   {
@@ -8348,13 +8031,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Archangel_2_Intro"
   },
   {
@@ -8372,7 +8054,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Archangel_3_Intro"
   },
   {
@@ -8428,7 +8109,6 @@
     "Height": 0,
     "CircleDistance": 22,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Archangel_6_Intro"
   },
   {
@@ -8440,13 +8120,12 @@
     "CastMage": 55,
     "CD": 1,
     "AnimaTrigger": 1,
-    "Type": false,
+    "Type": "False",
     "Distance": 22,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 6,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Archangel_11_Intro"
   },
   {
@@ -8482,7 +8161,6 @@
     "Height": 0,
     "CircleDistance": 8,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Archangel_8_Intro"
   },
   {
@@ -8518,7 +8196,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Archangel_10_Intro"
   },
   {
@@ -8555,7 +8232,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Archangel_13_Intro"
   },
   {
@@ -8592,7 +8268,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Archangel_15_Intro"
   },
   {
@@ -8611,7 +8286,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Archangel_16_Intro"
   },
   {
@@ -8622,13 +8296,12 @@
     "Characteristic": false,
     "CastMage": 120,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Archangel_17_Intro"
   },
   {
@@ -8639,13 +8312,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Scythemaster_1_Intro"
   },
   {
@@ -8656,13 +8328,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Scythemaster_2_Intro"
   },
   {
@@ -8716,7 +8387,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Scythemaster_5_Intro"
   },
   {
@@ -8781,13 +8451,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Scythemaster_9_Intro"
   },
   {
@@ -8840,7 +8509,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Scythemaster_12_Intro"
   },
   {
@@ -8948,7 +8616,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Scythemaster_18_Intro"
   },
   {
@@ -8959,13 +8626,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Magicsword_1_Intro"
   },
   {
@@ -8976,13 +8642,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Magicsword_2_Intro"
   },
   {
@@ -8999,7 +8664,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Magicsword_3_Intro"
   },
   {
@@ -9161,7 +8825,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Magicsword_12_Intro"
   },
   {
@@ -9233,7 +8896,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Magicsword_16_Intro"
   },
   {
@@ -9286,7 +8948,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Magicsword_19_Intro"
   },
   {
@@ -9303,7 +8964,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Magicsword_20_Intro"
   },
   {
@@ -9320,7 +8980,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Magicsword_21_Intro"
   },
   {
@@ -9337,7 +8996,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Magicsword_22_Intro"
   },
   {
@@ -9348,13 +9006,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_RighteousMonk_1_Intro"
   },
   {
@@ -9365,13 +9022,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_RighteousMonk_2_Intro"
   },
   {
@@ -9382,13 +9038,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 3600,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_RighteousMonk_3_Intro"
   },
   {
@@ -9423,7 +9078,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_RighteousMonk_5_Intro"
   },
   {
@@ -9440,7 +9094,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_RighteousMonk_6_Intro"
   },
   {
@@ -9475,7 +9128,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_RighteousMonk_8_Intro"
   },
   {
@@ -9493,7 +9145,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_RighteousMonk_9_Intro"
   },
   {
@@ -9546,7 +9197,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_RighteousMonk_12_Intro"
   },
   {
@@ -9563,7 +9213,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_RighteousMonk_13_Intro"
   },
   {
@@ -9652,7 +9301,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_RighteousMonk_18_Intro"
   },
   {
@@ -9663,13 +9311,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Librarian_1_Intro"
   },
   {
@@ -9680,13 +9327,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Librarian_2_Intro"
   },
   {
@@ -9740,7 +9386,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Librarian_5_Intro"
   },
   {
@@ -9830,7 +9475,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Librarian_10_Intro"
   },
   {
@@ -9884,7 +9528,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Librarian_13_Intro"
   },
   {
@@ -9913,13 +9556,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Librarian_15_Intro"
   },
   {
@@ -9984,13 +9626,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_SmokeScout_1_Intro"
   },
   {
@@ -10001,13 +9642,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_SmokeScout_2_Intro"
   },
   {
@@ -10025,7 +9665,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_SmokeScout_3_Intro"
   },
   {
@@ -10079,7 +9718,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_SmokeScout_6_Intro"
   },
   {
@@ -10115,7 +9753,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_SmokeScout_8_Intro"
   },
   {
@@ -10126,13 +9763,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_SmokeScout_9_Intro"
   },
   {
@@ -10150,7 +9786,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_SmokeScout_10_Intro"
   },
   {
@@ -10168,7 +9803,6 @@
     "Height": 0,
     "CircleDistance": 5,
     "Damage": 1.2,
-    "AdditionMode": "None",
     "Intro": "TM_SmokeScout_11_Intro"
   },
   {
@@ -10276,7 +9910,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_SmokeScout_17_Intro"
   },
   {
@@ -10287,13 +9920,12 @@
     "Characteristic": true,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_SmokeScout_18_Intro"
   },
   {
@@ -10304,13 +9936,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_MineArtisan_1_Intro"
   },
   {
@@ -10321,13 +9952,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_MineArtisan_2_Intro"
   },
   {
@@ -10338,13 +9968,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_MineArtisan_3_Intro"
   },
   {
@@ -10362,7 +9991,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_MineArtisan_4_Intro"
   },
   {
@@ -10380,7 +10008,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_MineArtisan_5_Intro"
   },
   {
@@ -10398,7 +10025,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_MineArtisan_6_Intro"
   },
   {
@@ -10470,7 +10096,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_MineArtisan_10_Intro"
   },
   {
@@ -10488,7 +10113,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_MineArtisan_11_Intro"
   },
   {
@@ -10506,7 +10130,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_MineArtisan_12_Intro"
   },
   {
@@ -10524,7 +10147,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_MineArtisan_13_Intro"
   },
   {
@@ -10560,7 +10182,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_MineArtisan_15_Intro"
   },
   {
@@ -10578,7 +10199,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_MineArtisan_16_Intro"
   },
   {
@@ -10589,13 +10209,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_MineArtisan_17_Intro"
   },
   {
@@ -10606,13 +10225,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Echo_1_Intro"
   },
   {
@@ -10623,13 +10241,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Echo_2_Intro"
   },
   {
@@ -10676,13 +10293,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Echo_5_Intro"
   },
   {
@@ -10693,13 +10309,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Echo_6_Intro"
   },
   {
@@ -10717,7 +10332,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Echo_7_Intro"
   },
   {
@@ -10753,7 +10367,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Echo_9_Intro"
   },
   {
@@ -10818,13 +10431,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Echo_13_Intro"
   },
   {
@@ -10835,13 +10447,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Echo_14_Intro"
   },
   {
@@ -10852,13 +10463,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hero_1_Intro"
   },
   {
@@ -10869,13 +10479,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hero_2_Intro"
   },
   {
@@ -10886,13 +10495,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hero_3_Intro"
   },
   {
@@ -10947,7 +10555,6 @@
     "Height": 50,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hero_6_Intro"
   },
   {
@@ -10984,7 +10591,6 @@
     "Height": 50,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hero_8_Intro"
   },
   {
@@ -11002,7 +10608,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hero_9_Intro"
   },
   {
@@ -11021,7 +10626,6 @@
     "Height": 50,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hero_10_Intro"
   },
   {
@@ -11032,13 +10636,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hero_11_Intro"
   },
   {
@@ -11057,7 +10660,6 @@
     "Height": 50,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hero_12_Intro"
   },
   {
@@ -11112,7 +10714,6 @@
     "Height": 50,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Hero_15_Intro"
   },
   {
@@ -11123,13 +10724,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Dirt_1_Intro"
   },
   {
@@ -11140,13 +10740,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Dirt_2_Intro"
   },
   {
@@ -11240,7 +10839,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Dirt_7_Intro"
   },
   {
@@ -11251,7 +10849,7 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
@@ -11275,7 +10873,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 5,
-    "AdditionMode": "None",
     "Intro": "TM_Dirt_9_Intro"
   },
   {
@@ -11293,7 +10890,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Dirt_10_Intro"
   },
   {
@@ -11312,7 +10908,6 @@
     "Height": 0,
     "CircleDistance": 5,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Dirt_11_Intro"
   },
   {
@@ -11360,13 +10955,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Dirt_14_Intro"
   },
   {
@@ -11384,7 +10978,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Dirt_15_Intro"
   },
   {
@@ -11395,7 +10988,7 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 12,
     "Width": 0,
     "Height": 0,
@@ -11412,13 +11005,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Warlord_01_Intro"
   },
   {
@@ -11429,13 +11021,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Warlord_02_Intro"
   },
   {
@@ -11446,13 +11037,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Warlord_03_Intro"
   },
   {
@@ -11506,7 +11096,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Warlord_06_Intro"
   },
   {
@@ -11517,13 +11106,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Warlord_07_Intro"
   },
   {
@@ -11541,7 +11129,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Warlord_08_Intro"
   },
   {
@@ -11552,13 +11139,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Warlord_09_Intro"
   },
   {
@@ -11570,13 +11156,12 @@
     "CastMage": 0,
     "CD": 1,
     "AnimaTrigger": 5,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Warlord_10_Intro"
   },
   {
@@ -11588,13 +11173,12 @@
     "CastMage": 0,
     "CD": 1,
     "AnimaTrigger": 6,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Warlord_11_Intro"
   },
   {
@@ -11695,13 +11279,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Warlord_17_Intro"
   },
   {
@@ -11714,13 +11297,12 @@
     "CD": 300,
     "ChantTime": 4,
     "AnimaTrigger": 12,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Warlord_18_Intro"
   },
   {
@@ -11731,13 +11313,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_LoneExile_01_Intro"
   },
   {
@@ -11748,13 +11329,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_LoneExile_02_Intro"
   },
   {
@@ -11765,13 +11345,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_LoneExile_03_Intro"
   },
   {
@@ -11782,13 +11361,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_LoneExile_04_Intro"
   },
   {
@@ -11842,7 +11420,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_LoneExile_07_Intro"
   },
   {
@@ -11860,7 +11437,6 @@
     "Height": 8,
     "CircleDistance": 0,
     "Damage": 1.35,
-    "AdditionMode": "None",
     "Intro": "TM_LoneExile_08_Intro"
   },
   {
@@ -11878,7 +11454,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 1.5,
-    "AdditionMode": "None",
     "Intro": "TM_LoneExile_09_Intro"
   },
   {
@@ -11889,13 +11464,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_LoneExile_10_Intro"
   },
   {
@@ -11906,13 +11480,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_LoneExile_11_Intro"
   },
   {
@@ -11930,7 +11503,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_LoneExile_12_Intro"
   },
   {
@@ -11948,7 +11520,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_LoneExile_13_Intro"
   },
   {
@@ -11977,13 +11548,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_LoneExile_15_Intro"
   },
   {
@@ -11994,13 +11564,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_01_Intro"
   },
   {
@@ -12011,13 +11580,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_02_Intro"
   },
   {
@@ -12028,13 +11596,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_03_Intro"
   },
   {
@@ -12052,7 +11619,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_04_Intro"
   },
   {
@@ -12063,13 +11629,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_05_Intro"
   },
   {
@@ -12087,7 +11652,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_06_Intro"
   },
   {
@@ -12105,7 +11669,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_07_Intro"
   },
   {
@@ -12122,7 +11685,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_08_Intro"
   },
   {
@@ -12140,7 +11702,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_09_Intro"
   },
   {
@@ -12176,7 +11737,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_11_Intro"
   },
   {
@@ -12241,13 +11801,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_15_Intro"
   },
   {
@@ -12301,7 +11860,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_18_Intro"
   },
   {
@@ -12337,7 +11895,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_20_Intro"
   },
   {
@@ -12355,7 +11912,6 @@
     "Height": 0,
     "CircleDistance": 5,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_21_Intro"
   },
   {
@@ -12373,7 +11929,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_22_Intro"
   },
   {
@@ -12391,7 +11946,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_23_Intro"
   },
   {
@@ -12402,13 +11956,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_24_Intro"
   },
   {
@@ -12426,7 +11979,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_25_Intro"
   },
   {
@@ -12444,7 +11996,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_26_Intro"
   },
   {
@@ -12462,7 +12013,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_27_Intro"
   },
   {
@@ -12480,7 +12030,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_28_Intro"
   },
   {
@@ -12498,7 +12047,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_29_Intro"
   },
   {
@@ -12509,13 +12057,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_BeastTamer_30_Intro"
   },
   {
@@ -12526,13 +12073,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_SwordSoul_1_Intro"
   },
   {
@@ -12543,13 +12089,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_SwordSoul_2_Intro"
   },
   {
@@ -12560,13 +12105,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_SwordSoul_3_Intro"
   },
   {
@@ -12656,7 +12200,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_SwordSoul_8_Intro"
   },
   {
@@ -12674,7 +12217,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_SwordSoul_9_Intro"
   },
   {
@@ -12692,7 +12234,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_SwordSoul_10_Intro"
   },
   {
@@ -12703,13 +12244,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_SwordSoul_11_Intro"
   },
   {
@@ -12799,7 +12339,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_SwordSoul_16_Intro"
   },
   {
@@ -12810,13 +12349,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Specialist_1_Intro"
   },
   {
@@ -12827,13 +12365,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Specialist_2_Intro"
   },
   {
@@ -12844,13 +12381,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Specialist_3_Intro"
   },
   {
@@ -12861,13 +12397,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Specialist_4_Intro"
   },
   {
@@ -12921,7 +12456,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Specialist_7_Intro"
   },
   {
@@ -12939,7 +12473,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Specialist_8_Intro"
   },
   {
@@ -12957,7 +12490,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Specialist_9_Intro"
   },
   {
@@ -12968,13 +12500,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Specialist_10_Intro"
   },
   {
@@ -12985,13 +12516,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Specialist_11_Intro"
   },
   {
@@ -13002,13 +12532,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Specialist_12_Intro"
   },
   {
@@ -13019,13 +12548,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Voodoo_1_Intro"
   },
   {
@@ -13036,13 +12564,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Voodoo_2_Intro"
   },
   {
@@ -13053,13 +12580,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Voodoo_3_Intro"
   },
   {
@@ -13134,7 +12660,6 @@
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Voodoo_7_Intro"
   },
   {
@@ -13201,13 +12726,12 @@
     "Characteristic": false,
     "CastMage": 0,
     "CD": 0,
-    "Type": false,
+    "Type": "False",
     "Distance": 0,
     "Width": 0,
     "Height": 0,
     "CircleDistance": 0,
     "Damage": 0,
-    "AdditionMode": "None",
     "Intro": "TM_Voodoo_11_Intro"
   },
   {
