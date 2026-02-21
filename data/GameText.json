@@ -162,5 +162,17 @@
   {
     "TextID": "TM_DiscardedItemTitle",
     "TextContent": "丟棄物品"
+  },
+  {
+    "TextID": "TM_Block",
+    "TextContent": "格檔成功"
+  },
+  {
+    "TextID": "TM_InCrowdControl",
+    "TextContent": "受到控制狀態"
+  },
+  {
+    "TextID": "TM_InCombatStatus",
+    "TextContent": "進入戰鬥中"
   }
 ]

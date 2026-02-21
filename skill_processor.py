@@ -2,8 +2,9 @@
 from commonfunction import get_text, battlelog_text_processor
 from typing import Tuple, Optional
 import copy
+import random
 
-def _execute_skill_operation(skillData: SkillData, attacker, defender)-> Optional[Tuple[str, int, float]]:
+def execute_skill_operation(skillData: SkillData, attacker, defender)-> Optional[Tuple[str, int, float]]:
     """實現技能效果執行入口"""
     returnResult = []
 
@@ -169,17 +170,18 @@ def _execute_component(skillData: SkillData,
             case "EnhanceSkill":
                 # 強化指定技能 在角色開一個新字典<BonusId,下個component資料>
                 attacker.passive_bar.add_skill_effect(tempSkillData.SkillID, tempSkillData)
-                key = op.Bonus[0]
-
-                if key not in attacker.enhance_skill_dict:
-                    attacker.enhance_skill_dict[key] = []
-
-                attacker.enhance_skill_dict[key].append(tempSkillData)
-                returnResult.append((battlelog_text_processor({
-                    "caster_text": attacker.name,
-                    "target_text": get_text(GameData.Instance.SkillDataDic[key].Name),
-                    "descript_text": get_text(tempSkillData.Name),
-                }, "enhanceSkill"), 0, 0))
+                # 掃描此被動技能內所有 EnhanceSkill ops，全部註冊
+                for enhance_op in tempSkillData.SkillOperationDataList:
+                    if enhance_op.SkillComponentID == "EnhanceSkill":
+                        key = enhance_op.Bonus[0]
+                        if key not in attacker.enhance_skill_dict:
+                            attacker.enhance_skill_dict[key] = []
+                        attacker.enhance_skill_dict[key].append(tempSkillData)
+                        returnResult.append((battlelog_text_processor({
+                            "caster_text": attacker.name,
+                            "target_text": get_text(GameData.Instance.SkillDataDic[key].Name),
+                            "descript_text": get_text(tempSkillData.Name),
+                        }, "enhanceSkill"), 0, 0))
                 break
 
             case "UpgradeSkill":
@@ -197,6 +199,67 @@ def _execute_component(skillData: SkillData,
                     "descript_text": get_text(tempSkillData.Name) ,
                 }, "upgradeSkill"), 0, 0))
 
+            case "Charge":
+                # 衝鋒/位移 - 模擬器無位置系統，標記成功即可
+                returnResult.append((battlelog_text_processor({
+                    "caster_text": attacker.name,
+                    "descript_text": get_text(tempSkillData.Name),
+                }, "charge"), 0, 0))
+                success = True
+
+            case "InheritDamage":
+                inherit_skill_id = op.Bonus[0]
+                inherit_skill = GameData.Instance.SkillDataDic[inherit_skill_id]
+                inheritResult = execute_skill_operation(inherit_skill, attacker, target)
+                for result in inheritResult:
+                    if isinstance(result, list):
+                        returnResult.extend(result)
+                    else:
+                        returnResult.append(result)
+
+            case "EventTrigger":
+                # 事件觸發器 - 訂閱事件，條件達成時執行後續的技能組件效果
+
+                # 空值檢查
+                event_type = parse_event_trigger(op)
+                if event_type is None:
+                    break
+
+                # 儲存 EventTrigger組件 後續的技能組件(當事件條件達成後須執行的效果)
+                remaining_ops = tempSkillData.SkillOperationDataList[index + 1:]
+
+                trigger_skill = copy.deepcopy(tempSkillData)
+                trigger_skill.SkillOperationDataList = remaining_ops
+
+                if event_type not in attacker.temp_dict:
+                    attacker.temp_dict[event_type] = []
+
+                # 將後續效果與原始條件儲存進暫存（條件在觸發時才判定）
+                attacker.temp_dict[event_type].append((trigger_skill, op))
+                break  # 後續 的技能組件效果會由訂閱觸發
+
+            case "DotDamage":
+                # 持續傷害 - 使用訂閱事件模式
+                base_damage = _calculate_dot_tick_damage(tempSkillData, op, attacker)
+
+                def SubscriptionDot(damage_val, target_ref, op_ref):
+                    target_ref.stats["HP"] -= damage_val
+                    target_ref.battle_log.append(battlelog_text_processor({
+                        "caster_text": target_ref.name,
+                        "descript_text": damage_val,
+                        "descript_color": "#ab0000",
+                    }, "dotDamageTick"))
+
+                tempfunction = lambda d=base_damage, t=target, o=op: SubscriptionDot(d, t, o)
+                target.temp_dict[f"dot_{skillData.SkillID}"] = tempfunction
+                target.subscription_skill_event += tempfunction
+                target.add_debuff_effect(op)
+                returnResult.append((battlelog_text_processor({
+                    "caster_text": attacker.name,
+                    "descript_text": get_text(tempSkillData.Name),
+                    "target_text": target.name,
+                }, "dotDamageStart", op.EffectDurationTime), 0, 0.5))
+
             case _:
                 returnResult.append(("",0,0))
 
@@ -204,6 +267,13 @@ def _execute_component(skillData: SkillData,
             "componentID": op.SkillComponentID,
             "success": success
         }
+
+    # 檢查是否有 HitReduceSec CD 減少效果 存至暫存字典 待結算
+    if hasattr(tempSkillData, 'hit_reduce_sec') and tempSkillData.hit_reduce_sec > 0:
+        hit_count = sum(1 for h in execution_history.values() if h["success"])
+        cd_reduction = hit_count * tempSkillData.hit_reduce_sec
+        attacker.temp_dict[f"cd_reduction_{skillData.SkillID}"] = cd_reduction
+
     return returnResult
 
 def execute_item_operation(itemData: ItemDataModel, attacker, defender, gui=None) -> Tuple[str, int, float]:
@@ -233,10 +303,13 @@ def status_skill_effect_start(op: SkillOperationData, attacker, defender) -> Tup
     """
     狀態效果啟動方法
     """
+
     match op.SkillComponentID:
         case "CrowdControl":
             defender.CrowdControlCalculator(op, 1)
             defender.add_debuff_effect(op)
+            # 觸發 InCrowdControl 事件（被控制時）
+            defender.battle_log.extend(defender.fire_event_trigger("InCrowdControl", attacker))
             return (battlelog_text_processor({
                 "caster_text": attacker.name,
                 "descript_text": get_text("TM_" + op.InfluenceStatus + "_Name"),
@@ -263,12 +336,20 @@ def status_skill_effect_end(op: SkillOperationData, character) -> Tuple[str, int
                 "descript_text": get_text("TM_" + op.InfluenceStatus + "_Name"),
             }, "crowdControlEnd", op.EffectDurationTime), 0, 0)
         case "Debuff":
-            # defender.apply_debuff(op.attr, op.value, op.duration)
             debuff_effect_processor(op,character,character,True)
             return (battlelog_text_processor({
                 "caster_text": character.name,
                 "descript_text": get_text("TM_" + op.InfluenceStatus + "_Name"),
             }, "debuffEnd", op.EffectDurationTime), 0, 0)
+        case "DotDamage":
+            dot_key = f"dot_{op.SkillID}"
+            if dot_key in character.temp_dict:
+                character.subscription_skill_event -= character.temp_dict[dot_key]
+                del character.temp_dict[dot_key]
+            return (battlelog_text_processor({
+                "caster_text": character.name,
+                "descript_text": get_text("TM_Dot_Name"),
+            }, "dotDamageEnd"), 0, 0)
 
 def debuff_effect_processor(op: SkillOperationData, attacker, defender,unsubscription = False):
     """
@@ -294,11 +375,11 @@ def debuff_effect_processor(op: SkillOperationData, attacker, defender,unsubscri
             else:
                 defender.subscription_skill_event -=  defender.temp_dict[op.SkillID]
         case "ReduceTargetDmg":
-            pass
+            value = op.EffectValue if unsubscription else -op.EffectValue
+            defender.SkillEffectStatusOperation("ReduceTargetDmg", (op.AddType == "Rate"), value)
         case "ArmorBreak":
-            pass
-        case "BreakDEF":
-            pass
+            value = op.EffectValue if unsubscription else -op.EffectValue
+            defender.SkillEffectStatusOperation("DEF", (op.AddType == "Rate"), value)
 
 def skill_condition_process(caster, op: SkillOperationData) -> bool:
     """
@@ -358,8 +439,24 @@ def skill_condition_check(caster, key: str, value) -> bool:
             return (len(caster.equipped_armor) == 5 and
                     all(x[0].TypeID == str(value)
                     for x in caster.equipped_armor))
+        case "Equip":
+            # 通用裝備檢查 - 武器或防具中有此類型即可
+            weapon_match = False
+            armor_match = False
+            if caster.equipped_weapon is not None:
+                weapon_match = any(x[0].TypeID == str(value) for x in caster.equipped_weapon)
+            if caster.equipped_armor is not None:
+                armor_match = any(x[0].TypeID == str(value) for x in caster.equipped_armor)
+            return weapon_match or armor_match
+        case "Block":
+            # Block 條件由 InheritDamage 的 _parse_block_probability 處理
+            # 這裡回傳 True 讓條件檢查通過，實際機率在 BlockCalculator 判定
+            return True
         case "InCombatStatus":
             # 模擬總是在戰鬥中 所以一律回傳true
+            return True
+        case "InCrowdControl":
+            # 事件觸發條件 - 註冊階段放行，實際判定在 event_condition_check
             return True
         case "HpLess":
             return caster.stats["HP"] < (float(value)*caster.stats["MaxHP"])
@@ -460,25 +557,110 @@ def upgrade_skill_processor(upgradeSkillData, skillData: SkillData)-> SkillData:
 
     return tempSkillData
 
-def enhance_skill_processor(enhanceSkillDataList , skillData: SkillData):
+def enhance_skill_processor(enhanceSkillDataList, skillData: SkillData):
     """
-    強化技能處理
+    強化技能處理 - 解析被動技能中 EnhanceSkill 之後的 PassiveBuff 等 ops
     """
-
-    # 暫存 技能資料 並修改
     tempSkillData = copy.deepcopy(skillData)
 
-    # 展開所有 enhanceSkillDataList 裡的 operation
-    enhance_ops = [
-        op
-        for skill in enhanceSkillDataList
-        for op in skill.SkillOperationDataList
-        if op.SkillComponentID == "EnhanceSkill"
-    ]
+    for enhanceSkill in enhanceSkillDataList:
+        ops = enhanceSkill.SkillOperationDataList
+        processing_for_this_skill = False
 
-    tempSkillData.SkillOperationDataList = [
-        *skillData.SkillOperationDataList,
-        *enhance_ops
-    ]
+        for op in ops:
+            if op.SkillComponentID == "EnhanceSkill":
+                processing_for_this_skill = (op.Bonus[0] == skillData.SkillID)
+            elif processing_for_this_skill:
+                if op.SkillComponentID == "PassiveBuff":
+                    apply_enhance_passivebuff(tempSkillData, op)
+                else:
+                    # 其他 ops (如 Charge) 直接附加到強化技能的操作列表
+                    tempSkillData.SkillOperationDataList.append(op)
 
     return tempSkillData
+
+def apply_enhance_passivebuff(skillData: SkillData, op):
+    """處理 EnhanceSkill 附帶的 PassiveBuff 特殊參數"""
+    match op.InfluenceStatus:
+        case "EffectValue":
+            for skill_op in skillData.SkillOperationDataList:
+                if skill_op.SkillComponentID in ["Damage", "MultipleDamage", "InheritDamage"]:
+                    skill_op.EffectValue += op.EffectValue
+        case "HitReduceSec":
+            if not hasattr(skillData, 'hit_reduce_sec'):
+                skillData.hit_reduce_sec = 0
+            skillData.hit_reduce_sec += op.EffectValue
+        case "Distance":
+            skillData.Distance += op.EffectValue
+        case _:
+            skillData.SkillOperationDataList.append(op)
+
+def parse_event_trigger(op):
+    """從 EventTrigger 的 Condition 解析事件類型
+
+    只提取前綴作為事件類型，條件判斷延遲到觸發時執行
+    """
+    for cond_list in [op.ConditionOR or [], op.ConditionAND or []]:
+        for cond in cond_list:
+            parts = cond.split('_')
+            event_type = parts[0]
+            return event_type
+    return None
+
+def event_trigger_condition_process(op, caster) -> bool:
+    """事件觸發條件檢查 - 模式同 skill_condition_process
+
+    在事件觸發時呼叫，依照 ConditionOR / ConditionAND 判定是否執行
+    """
+    if (not any(op.ConditionOR) and not any(op.ConditionAND)):
+        return True
+
+    #OR條件檢查
+    or_list = []
+    if any(op.ConditionOR):
+        for or_data in op.ConditionOR:
+            parts = or_data.split('_')
+            key = parts[0]
+            value = '_'.join(parts[1:])
+            or_list.append(event_condition_check(key, value, caster))
+    else:
+        or_list.append(True)
+
+    # AND條件檢查
+    and_list = []
+    if any(op.ConditionAND):
+        for and_data in op.ConditionAND:
+            parts = and_data.split('_')
+            key = parts[0]
+            value = '_'.join(parts[1:])
+            and_list.append(event_condition_check(key, value, caster))
+    else:
+        and_list.append(True)
+
+    return any(or_list) and all(and_list)
+
+def event_condition_check(key: str, value: str, caster) -> bool:
+    """事件條件檢查 - 模式同 skill_condition_check
+
+    依照前綴拆出後綴門檻，直接跑執行再回傳結果
+    """
+    match key:
+        case "Block":
+            # 後綴為觸發機率，跑隨機判定
+            return random.random() < float(value)
+        case "InCombatStatus":
+            # 模擬器始終在戰鬥中
+            return True
+        case "InCrowdControl":
+            # 事件觸發時必然被控制中
+            return True
+        case "HpLess":
+            return caster.stats["HP"] < (float(value) * caster.stats["MaxHP"])
+        case _:
+            return True
+
+def _calculate_dot_tick_damage(skillData: SkillData, op, attacker) -> int:
+    """計算 DotDamage 每秒傷害值"""
+    base_atk = attacker.stats.get("MeleeATK", 0)
+    effect_value = op.EffectValue if op.EffectValue > 0 else skillData.Damage
+    return round(base_atk * effect_value)

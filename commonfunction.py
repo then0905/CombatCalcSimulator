@@ -15,6 +15,7 @@ def get_text(text_id: str) -> str:
     text_obj = GameData.Instance.GameTextDataDic.get(text_id, None)
     if text_obj is not None:
         return text_obj.TextContent
+    print(f"{text_id} 沒有找到字典資料")
     return f"[{text_id}]"
 
 def clamp(value, min_value, max_value):
@@ -189,6 +190,45 @@ def battlelog_text_processor(input_log_dic,log_type:str,other = None):
                 f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>'
                 f' 的技能：[ <size={log_dic["target_size"]}><color={log_dic["target_color"]}>{log_dic["target_text"]}</color></size> ]'
                 f' 受到了 [ <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size> ] 強化！')
+
+        # region 新增通用技能組件 Log
+
+        case "charge":
+            return (
+                f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>'
+                f' 發動了衝鋒 <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size>')
+        case "inheritDamagePassive":
+            return (
+                f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>'
+                f' 啟動了被動反擊技能：<size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size>')
+        case "counterAttack":
+            return (
+                f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>'
+                f' 觸發反擊！使用 <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size>'
+                f' 對 <size={log_dic["target_size"]}><color={log_dic["target_color"]}>{log_dic["target_text"]}</color></size>'
+                f' 造成 {other} 傷害！')
+        case "dotDamageStart":
+            return (
+                f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>'
+                f' 對 <size={log_dic["target_size"]}><color={log_dic["target_color"]}>{log_dic["target_text"]}</color></size>'
+                f' 施加了持續傷害：<size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size>'
+                f' 持續 {other} 秒')
+        case "dotDamageTick":
+            return (
+                f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>'
+                f' 因為持續傷害效果，'
+                f' 受到了 <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size> 的傷害')
+        case "dotDamageEnd":
+            return (
+                f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>'
+                f' 的持續傷害效果已結束')
+        case "eventTriggerActivate":
+            return (
+                f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>'
+                f' 因為{other}，啟用了'
+                f' [ <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size> ] 的效果')
+
+        # endregion
 
         # region 負面狀態效果執行
 

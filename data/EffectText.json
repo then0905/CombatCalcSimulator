@@ -16,11 +16,11 @@
     "TextContent": "在持續時間內使目標進入禁錮狀態，不能使用位移效果的技能、不能移動。可以使用道具，可以使用非位移技能"
   },
   {
-    "TextID": "TM_Suppress_Name",
+    "TextID": "TM_Inhibit_Name",
     "TextContent": "壓制"
   },
   {
-    "TextID": "TM_Suppress_Intro",
+    "TextID": "TM_Inhibit_Intro",
     "TextContent": "在持續時間內使目標進入壓制狀態、不能使用技能、不能移動、不能使用道具，無法獲得來自友方的新增益效果、不能接受來自友方的位移"
   },
   {

@@ -42,6 +42,7 @@ class CharacterStatus_Secret:
     RecoveryDmg:float = 0.0 #吸收傷害回血  (小數點)
     Damage:float = 0.0 #總傷害(傷害公式計算完成後乘上)
     IncreaseMeleeRange:float = 0.0 #近距離攻擊範圍增強
+    ReduceCCTime:float = 0.0 #控制狀態持續時間倍率（0.75=減少25%）
     
 @dataclass
 class CharacterStatus_Debuff:

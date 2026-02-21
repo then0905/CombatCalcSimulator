@@ -8,9 +8,9 @@ from game_models import GameData, ItemsDic, SkillData, SkillOperationData, Monst
 from formula_parser import FormulaParser
 from typing import Tuple
 from commonfunction import clamp, battlelog_text_processor, get_text, get_time_stap
-from skill_processor import (_execute_skill_operation, execute_item_operation,
-    status_skill_effect_end, skill_all_condition_process, skill_condition_process,
-    skill_continuancebuff_bonus_processor)
+from skill_processor import (execute_skill_operation, execute_item_operation,
+                             status_skill_effect_end, skill_all_condition_process, skill_condition_process,
+                             skill_continuancebuff_bonus_processor, event_trigger_condition_process)
 from status_operation import StatusValues
 from AICombatAction import ai_action
 from commontool import Event
@@ -67,6 +67,7 @@ class BattleCharacter:
     upgrade_skill_dict:Dict[str,SkillData] = field(default_factory=dict)    #存放所選職業的技能內有升級技能的字典
     enhance_skill_dict:Dict[str,SkillData] = field(default_factory=dict)    #存放所選職業的技能內有強化技能的字典
     inherit_damage_skill_dict:Dict[str,SkillData] = field(default_factory=dict)    #存放所選職業的技能內有繼承技能傷害的字典
+    event_trigger_dict:Dict[str,list] = field(default_factory=dict)    #事件觸發字典 {"Block": [(trigger_skill, probability), ...]}
 
     def __post_init__(self):
         # 在物件建立後，才初始化 AI
@@ -219,10 +220,37 @@ class BattleCharacter:
             characteristic = s.Characteristic
             condition_ok = skill_all_condition_process(self, s)
             if not characteristic and condition_ok:
-                for retult in _execute_skill_operation(s, self, self):
+                for retult in execute_skill_operation(s, self, self):
                     for temp in retult:
                         log = temp[0]
                         self.battle_log.append(log)
+
+    def fire_event_trigger(self, event_type: str, opponent):
+        """觸發事件訂閱 - 執行訂閱到指定事件類型的所有技能"""
+
+        log_results = []
+
+        for trigger_skill, trigger_op in self.temp_dict.get(event_type, []):
+            if event_trigger_condition_process(trigger_op, self):
+                # 啟用 log
+                log_results.append(battlelog_text_processor({
+                    "caster_text": self.name,
+                    "descript_text": get_text(trigger_skill.Name),
+                    "descript_color": "#00c8ff",
+                }, "eventTriggerActivate", get_text(f"TM_{event_type}")))
+
+                skill_results = execute_skill_operation(trigger_skill, self, opponent)
+                for result_list in skill_results:
+                    if result_list is None:
+                        continue
+                    if isinstance(result_list, list):
+                        for r in result_list:
+                            if r is not None:
+                                log_results.append(r[0])
+                    else:
+                        log_results.append(result_list[0])
+
+        return log_results
 
     def add_skill_buff_effect(self, skillData: SkillData, op) -> int:
         """
@@ -301,7 +329,6 @@ class BattleCharacter:
         self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
         # 效果欄增加資料
         self.passive_bar.add_skill_effect(temp_id, skillData)
-        self.buff_skill[temp_id] = (skillData, skillData.SkillOperationDataList[0].EffectDurationTime)
 
     def add_skill_addtive_effect(self, skillData: SkillData, op, stackCount: int):
         """
@@ -387,7 +414,12 @@ class BattleCharacter:
         """
         temp_id = get_time_stap(op.InfluenceStatus)
         self.debuff_bar.add_debuff(temp_id, op.InfluenceStatus)
-        self.debuff_skill[temp_id] = op, op.EffectDurationTime
+        duration = op.EffectDurationTime - self.stats["DisorderResistance"]
+        # ReduceCCTime 只對控制狀態生效（首次CC不受影響，後續才減少）
+        if op.SkillComponentID == "CrowdControl" and self.stats["ReduceCCTime"] > 0:
+            duration *= self.stats["ReduceCCTime"]
+        self.debuff_skill[temp_id] = op, max(0, duration)
+
 
     def CrowdControlCalculator(self, op: SkillOperationData, value: int):
         """
@@ -398,6 +430,9 @@ class BattleCharacter:
                 self.controlled_for_skill += value
                 self.controlled_for_attack += value
             case "Taunt":
+                self.controlled_for_attack += value
+            case "Inhibit":
+                self.controlled_for_skill += value
                 self.controlled_for_attack += value
 
     def processRecovery(self, op,effectName:str, caster, target) -> Tuple[str, int, float]:
@@ -492,7 +527,23 @@ class BattleCharacter:
                 "descript_text": get_text(skill.Name),
                 "descript_color": "#ff9300",
             }, "block"), 0, self.attackTimer
-            return [blockResult]
+            results = [blockResult]
+
+            # 事件觸發檢查 - Block
+            for trigger_skill, trigger_op in target.temp_dict.get("Block", []):
+                if event_trigger_condition_process(trigger_op, target):
+                    counter_results = execute_skill_operation(trigger_skill, target, self)
+                    for result_list in counter_results:
+                        if result_list is None:
+                            continue
+                        if isinstance(result_list, list):
+                            for r in result_list:
+                                if r is not None:
+                                    results.append(r)
+                        else:
+                            results.append(result_list)
+
+            return results
         else:
             return self.CrtCalculator(skill, target)
 
@@ -706,13 +757,16 @@ class BattleCharacter:
                 self._apply_effect("FinalDamageReductionRate", isRate, value)
             case "SpeedSlow":
                 self._apply_effect("SpeedSlowRate" if(isRate is True) else "SpeedSlow", isRate, value)
+            case "ReduceCCTime":
+                # EffectValue 直接作為倍率儲存（基礎值為0，Rate*0=0 無意義）
+                self._apply_effect("ReduceCCTime", False, value)
             # 一般數值
             case _:
                 if hasattr(self.effect, stateType):
                     self._apply_effect(stateType, isRate, value)
                 #else:
                     #print("未定義的參數:", stateType)
-
+        #print(f"屬性: {stateType} 增加值:{value} 增加方式: {isRate}")
         # 套完 Effect 重算 stats
         self._recalculate_stats()
         self.character_overview.update_state(self.stats)
@@ -745,7 +799,8 @@ class BattleCharacter:
             name = f.name
             if name != 'HP' and name != 'MP':
                 self.stats[name] = getattr(self.basal, name) + getattr(self.equip, name) + getattr(self.effect, name)
-
+                #if name == "BlockRate":
+                    #print(f"名稱: {name} 基礎值:{getattr(self.basal, name)} 裝備值: {getattr(self.equip, name)} 效果值: {getattr(self.effect, name)} 總值: {self.stats[name]}")
         # 套 buff 增加的當前 HP/MP
         self.stats["HP"] += self.tempHp
         self.stats["MP"] += self.tempMp
@@ -831,7 +886,7 @@ class BattleSimulator:
                     # 其他必要參數...
                 )
                 if attacker.action_check(normal_attack):
-                    for log_msg, damage, attack_timer in _execute_skill_operation(normal_attack, attacker, target):
+                    for log_msg, damage, attack_timer in execute_skill_operation(normal_attack, attacker, target):
                         self.battle_log.append(log_msg)
                         reward += ai.calculate_reward(damage,target.is_alive(),attacker.is_alive())
                         total_attack_timer += attack_timer
@@ -872,7 +927,7 @@ class BattleSimulator:
                     #print(
                         #f"{attacker.name} 使用 ：{get_text(skill.Name)} ({skill.SkillID}) 原本魔力為：{attacker.stats["MP"]} 消耗魔力為：{skill.CastMage}")
                     attacker.stats["MP"] -= skill.CastMage
-                    for resultList in _execute_skill_operation(skill, attacker, target):
+                    for resultList in execute_skill_operation(skill, attacker, target):
                         if resultList is None:
                             print(f"資料有錯喔!: {skill.SkillID}  → temp 本身就是 None")
                         elif isinstance(resultList, list) and any(x is None for x in resultList):
@@ -888,6 +943,11 @@ class BattleSimulator:
                             "descript_color": "#ff0000",
                         }, "skillTimer", f"{1 if skill.Type == "Buff" else 1.8}"))
                             attacker.skill_cooldowns[skill.SkillID] = skill.CD
+                            # 套用 HitReduceSec CD 減少
+                            cd_key = f"cd_reduction_{skill.SkillID}"
+                            if cd_key in attacker.temp_dict:
+                                attacker.skill_cooldowns[skill.SkillID] = max(0,
+                                    attacker.skill_cooldowns[skill.SkillID] - attacker.temp_dict.pop(cd_key))
                             reward += ai.calculate_reward(damage,target.is_alive(),attacker.is_alive())
                             total_attack_timer += attack_timer
                             self.damage_data.append({
@@ -932,6 +992,10 @@ class BattleSimulator:
 
         player.run_passive_skill()
         enemy.run_passive_skill()
+
+        # 觸發 InCombatStatus 事件（進入戰鬥）
+        self.battle_log.extend(player.fire_event_trigger("InCombatStatus", enemy))
+        self.battle_log.extend(enemy.fire_event_trigger("InCombatStatus", player))
 
         #匿名方法 更新雙方血量魔力
         def update_hp_mp():
@@ -1014,6 +1078,10 @@ class BattleSimulator:
         player.run_passive_skill()
         enemy.run_passive_skill()
 
+        # 觸發 InCombatStatus 事件（進入戰鬥）
+        self.battle_log.extend(player.fire_event_trigger("InCombatStatus", enemy))
+        self.battle_log.extend(enemy.fire_event_trigger("InCombatStatus", player))
+
         # ── 建立優先佇列 ──
         # 事件格式: (time, priority, event_type, data)
         #   priority: 0=TICK, 1=PLAYER_ATTACK, 2=ENEMY_ATTACK （同時間時依此順序）
@@ -1087,7 +1155,7 @@ class BattleSimulator:
                     CastMage=0,
                 )
                 if attacker.action_check(normal_attack):
-                    for log_msg, damage, attack_timer in _execute_skill_operation(normal_attack, attacker, target):
+                    for log_msg, damage, attack_timer in execute_skill_operation(normal_attack, attacker, target):
                         self.battle_log.append(log_msg)
                         reward += ai.calculate_reward(damage, target.is_alive(), attacker.is_alive())
                         total_attack_timer += attack_timer
@@ -1120,7 +1188,7 @@ class BattleSimulator:
                 attacker.skill_usage[get_text(skill.Name)] += 1
                 if attacker.action_check(skill):
                     attacker.stats["MP"] -= skill.CastMage
-                    for resultList in _execute_skill_operation(skill, attacker, target):
+                    for resultList in execute_skill_operation(skill, attacker, target):
                         if resultList is None:
                             continue
                         elif isinstance(resultList, list) and any(x is None for x in resultList):
@@ -1136,6 +1204,11 @@ class BattleSimulator:
                                 "descript_color": "#ff0000",
                             }, "skillTimer", f"{1 if skill.Type == 'Buff' else 1.8}"))
                             attacker.skill_cooldowns[skill.SkillID] = skill.CD
+                            # 套用 HitReduceSec CD 減少
+                            cd_key = f"cd_reduction_{skill.SkillID}"
+                            if cd_key in attacker.temp_dict:
+                                attacker.skill_cooldowns[skill.SkillID] = max(0,
+                                    attacker.skill_cooldowns[skill.SkillID] - attacker.temp_dict.pop(cd_key))
                             reward += ai.calculate_reward(damage, target.is_alive(), attacker.is_alive())
                             total_attack_timer += attack_timer
                             self.damage_data.append({

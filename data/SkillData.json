@@ -1348,7 +1348,10 @@
       },
       {
         "SkillID": "Berserker_16",
-        "SkillComponentID": "EventTrigger"
+        "SkillComponentID": "EventTrigger",
+        "ConditionOR": [
+          "InCombatStatus_True"
+        ]
       },
       {
         "SkillID": "Berserker_16",
@@ -1356,9 +1359,6 @@
         "EffectValue": 10,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
-        "ConditionOR": [
-          "InCombatStatus_True"
-        ],
         "EffectDurationTime": 1.5
       },
       {
@@ -1367,9 +1367,6 @@
         "EffectValue": 0.8,
         "InfluenceStatus": "AS",
         "AddType": "Value",
-        "ConditionOR": [
-          "InCombatStatus_True"
-        ],
         "EffectDurationTime": 1.5
       }
     ]
@@ -2048,7 +2045,10 @@
       },
       {
         "SkillID": "Paladin_16",
-        "SkillComponentID": "EventTrigger"
+        "SkillComponentID": "EventTrigger",
+        "ConditionOR": [
+          "InCrowdControl_True"
+        ]
       },
       {
         "SkillID": "Paladin_16",

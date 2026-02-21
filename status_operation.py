@@ -734,6 +734,19 @@ class CharacterStatusCalculator:
         格檔計算
         """
 
+        weapon_blockRate = sum(
+            weapon.BlockRate
+            + next(
+                (
+                    forge.BlockRate
+                    for forge in weapon.ForgeConfigList
+                    if forge.ForgeLv == forgeLv
+                ),
+                0,
+            )
+            for weapon, forgeLv in self.weapon_list
+        )
+
         armor_blockRate = sum(
             armor.BlockRate
             + next(
@@ -747,7 +760,7 @@ class CharacterStatusCalculator:
             for armor , forgeLv in self.armor_list
         )
 
-        self.temp_equip_status.BlockRate = armor_blockRate
+        self.temp_equip_status.BlockRate = armor_blockRate + weapon_blockRate
         
     def disorderResistance(self):
         """
