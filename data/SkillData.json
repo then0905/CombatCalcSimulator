@@ -2598,13 +2598,13 @@
         "ConditionOR": [
           "Block_0.35"
         ],
-        "EffectRecive": 0,
+        "EffectRecive": -1,
         "TargetCount": 0
       },
       {
         "SkillID": "Praetorian_12",
         "SkillComponentID": "InheritDamage",
-        "EffectRecive": 0,
+        "EffectRecive": -1,
         "TargetCount": 0,
         "Bonus": [
           "Praetorian_1"
