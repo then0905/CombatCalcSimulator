@@ -935,13 +935,7 @@ class BattleSimulator:
                         for temp in resultList:
                             log_msg, damage, attack_timer = temp
                             self.battle_log.append(log_msg)
-                            self.battle_log.append(battlelog_text_processor({
-                            "caster_text": attacker.name,
-                            "caster_color": "#636363",
-                            "caster_size": 12,
-                            "descript_text": get_text(skill.Name),
-                            "descript_color": "#ff0000",
-                        }, "skillTimer", f"{1 if skill.Type == "Buff" else 1.8}"))
+
                             attacker.skill_cooldowns[skill.SkillID] = skill.CD
                             # 套用 HitReduceSec CD 減少
                             cd_key = f"cd_reduction_{skill.SkillID}"
@@ -956,6 +950,13 @@ class BattleSimulator:
                                 "skill":get_text(skill.Name),
                                 "Damage":damage,
                             })
+                    self.battle_log.append(battlelog_text_processor({
+                        "caster_text": attacker.name,
+                        "caster_color": "#636363",
+                        "caster_size": 12,
+                        "descript_text": get_text(skill.Name),
+                        "descript_color": "#ff0000",
+                    }, "skillTimer", f"{1 if skill.Type == "Buff" else 1.8}"))
                 else:
                     reward = -0.1  # 不可施放技能 懲罰值
 
@@ -1196,13 +1197,7 @@ class BattleSimulator:
                         for temp in resultList:
                             log_msg, damage, attack_timer = temp
                             self.battle_log.append(log_msg)
-                            self.battle_log.append(battlelog_text_processor({
-                                "caster_text": attacker.name,
-                                "caster_color": "#636363",
-                                "caster_size": 12,
-                                "descript_text": get_text(skill.Name),
-                                "descript_color": "#ff0000",
-                            }, "skillTimer", f"{1 if skill.Type == 'Buff' else 1.8}"))
+
                             attacker.skill_cooldowns[skill.SkillID] = skill.CD
                             # 套用 HitReduceSec CD 減少
                             cd_key = f"cd_reduction_{skill.SkillID}"
@@ -1217,6 +1212,13 @@ class BattleSimulator:
                                 "skill": get_text(skill.Name),
                                 "Damage": damage,
                             })
+                    self.battle_log.append(battlelog_text_processor({
+                        "caster_text": attacker.name,
+                        "caster_color": "#636363",
+                        "caster_size": 12,
+                        "descript_text": get_text(skill.Name),
+                        "descript_color": "#ff0000",
+                    }, "skillTimer", f"{1 if skill.Type == 'Buff' else 1.8}"))
                 else:
                     reward = -0.1
                     ai.record_result(reward, False)
