@@ -532,6 +532,11 @@ class BattleCharacter:
             # 事件觸發檢查 - Block
             for trigger_skill, trigger_op in target.temp_dict.get("Block", []):
                 if event_trigger_condition_process(trigger_op, target):
+                    results.append((battlelog_text_processor({
+                        "caster_text": target.name,
+                        "descript_text": get_text(trigger_skill.Name),
+                        "descript_color": "#00c8ff",
+                    }, "eventTriggerActivate", get_text("TM_Block")), 0, 0))
                     counter_results = execute_skill_operation(trigger_skill, target, self)
                     for result_list in counter_results:
                         if result_list is None:
