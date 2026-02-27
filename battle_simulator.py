@@ -64,6 +64,7 @@ class BattleCharacter:
     subscription_skill_event:Event = field(default_factory=Event, init=False, repr=False)     #需要訂閱的技能 訂閱後將每固定時間檢查是否達成條件而執行
     subscription_skill_time = 0  #紀錄訂閱技能的呼叫間隔時間(區間一到就呼叫一次技能)
     temp_dict: Dict[str, object] = field(default_factory=dict)  #暫存動態資料 有需要再寫入 (例如:怒氣,疊層值)
+    opponent: Optional["BattleCharacter"] = field(default=None, init=False, repr=False)  #對手引用（用於事件觸發定期重評估）
     upgrade_skill_dict:Dict[str,SkillData] = field(default_factory=dict)    #存放所選職業的技能內有升級技能的字典
     enhance_skill_dict:Dict[str,SkillData] = field(default_factory=dict)    #存放所選職業的技能內有強化技能的字典
     inherit_damage_skill_dict:Dict[str,SkillData] = field(default_factory=dict)    #存放所選職業的技能內有繼承技能傷害的字典
@@ -169,7 +170,7 @@ class BattleCharacter:
                 }, "naturalMpRecovery"))
 
         #持續疊加的Buff
-        if (self.additive_buff_time < 0.25):
+        if (self.additive_buff_time < GameData.Instance.GameSettingDic["AdditiveBuffTime"].GameSettingValue):
             self.additive_buff_time += dt
         else:
             self.additive_buff_time = 0
@@ -177,7 +178,7 @@ class BattleCharacter:
 
 
         #持續疊加的Debuff
-        if (self.additive_debuff_time < 0.25):
+        if (self.additive_debuff_time < GameData.Instance.GameSettingDic["AdditiveDebuffTime"].GameSettingValue):
             self.additive_debuff_time += dt
         else:
             self.additive_debuff_time = 0
@@ -190,6 +191,14 @@ class BattleCharacter:
         else:
             self.subscription_skill_time = 0
             self.subscription_skill_event()
+
+        # 定期重新評估的事件觸發（由 EventTrigger 的 RefreshInterval 設定，資料驅動）
+        if "_periodic_triggers" in self.temp_dict and self.opponent is not None:
+            for entry in self.temp_dict["_periodic_triggers"]:
+                entry[2] += dt
+                if entry[2] >= entry[1]:
+                    entry[2] = 0.0
+                    self.battle_log.extend(self.fire_event_trigger(entry[0], self.opponent))
 
     def use_item_id(self, itemid) -> Tuple[str, int, float]:
         for idx, (item, count) in enumerate(self.items):
@@ -232,23 +241,38 @@ class BattleCharacter:
 
         for trigger_skill, trigger_op in self.temp_dict.get(event_type, []):
             if event_trigger_condition_process(trigger_op, self):
-                # 啟用 log
-                log_results.append(battlelog_text_processor({
-                    "caster_text": self.name,
-                    "descript_text": get_text(trigger_skill.Name),
-                    "descript_color": "#00c8ff",
-                }, "eventTriggerActivate", get_text(f"TM_{event_type}")))
+                # 檢查此觸發技能的buff是否已在作用中
+                skill_id = trigger_skill.SkillID
+                existing_keys = [k for k in self.buff_skill if k == skill_id or k.startswith(skill_id + "_")]
 
-                skill_results = execute_skill_operation(trigger_skill, self, opponent)
-                for result_list in skill_results:
-                    if result_list is None:
-                        continue
-                    if isinstance(result_list, list):
-                        for r in result_list:
-                            if r is not None:
-                                log_results.append(r[0])
-                    else:
-                        log_results.append(result_list[0])
+                if existing_keys:
+                    # Buff已在作用中 - 只刷新持續時間，不重複套用效果
+                    max_dur = max(
+                        (op.EffectDurationTime for op in trigger_skill.SkillOperationDataList
+                         if op.EffectDurationTime),
+                        default=0
+                    )
+                    for key in existing_keys:
+                        skilldata, _ = self.buff_skill[key]
+                        self.buff_skill[key] = (skilldata, max_dur)
+                else:
+                    # Buff未作用 - 正常執行並記錄啟用log
+                    log_results.append(battlelog_text_processor({
+                        "caster_text": self.name,
+                        "descript_text": get_text(trigger_skill.Name),
+                        "descript_color": "#00c8ff",
+                    }, "eventTriggerActivate", get_text(f"TM_{event_type}")))
+
+                    skill_results = execute_skill_operation(trigger_skill, self, opponent)
+                    for result_list in skill_results:
+                        if result_list is None:
+                            continue
+                        if isinstance(result_list, list):
+                            for r in result_list:
+                                if r is not None:
+                                    log_results.append(r[0])
+                        else:
+                            log_results.append(result_list[0])
 
         return log_results
 
@@ -999,6 +1023,10 @@ class BattleSimulator:
         player.run_passive_skill()
         enemy.run_passive_skill()
 
+        # 設定對手引用（用於InCombatStatus定期重新觸發）
+        player.opponent = enemy
+        enemy.opponent = player
+
         # 觸發 InCombatStatus 事件（進入戰鬥）
         self.battle_log.extend(player.fire_event_trigger("InCombatStatus", enemy))
         self.battle_log.extend(enemy.fire_event_trigger("InCombatStatus", player))
@@ -1083,6 +1111,10 @@ class BattleSimulator:
         # 執行被動技能
         player.run_passive_skill()
         enemy.run_passive_skill()
+
+        # 設定對手引用（用於InCombatStatus定期重新觸發）
+        player.opponent = enemy
+        enemy.opponent = player
 
         # 觸發 InCombatStatus 事件（進入戰鬥）
         self.battle_log.extend(player.fire_event_trigger("InCombatStatus", enemy))

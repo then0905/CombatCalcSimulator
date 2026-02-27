@@ -236,6 +236,19 @@ def _execute_component(skillData: SkillData,
 
                 # 將後續效果與原始條件儲存進暫存（條件在觸發時才判定）
                 attacker.temp_dict[event_type].append((trigger_skill, op))
+
+                # 根據事件類型決定是否需要定期重評估（間隔秒數統一讀取 GameSetting["RefreshInterval"]）
+                match event_type:
+                    case "InCombatStatus":
+                        if "_periodic_triggers" not in attacker.temp_dict:
+                            attacker.temp_dict["_periodic_triggers"] = []
+                        interval = GameData.Instance.GameSettingDic["RefreshInterval"].GameSettingValue
+                        attacker.temp_dict["_periodic_triggers"].append(
+                            [event_type, interval, 0.0]  # [事件類型, 間隔秒, 當前計時]
+                        )
+                    case _:
+                        pass  # 其他事件類型（Block、InCrowdControl 等）只在事件發生時觸發一次
+
                 break  # 後續 的技能組件效果會由訂閱觸發
 
             case "DotDamage":

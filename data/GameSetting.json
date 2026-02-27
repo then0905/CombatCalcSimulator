@@ -1,78 +1,90 @@
 [
   {
     "GameSettingID": "HpRecoverySec",
-    "GameSettingValue": 12
+    "GameSettingValue": "12"
   },
   {
     "GameSettingID": "MpRecoverySec",
-    "GameSettingValue": 20
+    "GameSettingValue": "20"
   },
   {
     "GameSettingID": "HumanBasalHpRecovery",
-    "GameSettingValue": 10
+    "GameSettingValue": "10"
   },
   {
     "GameSettingID": "ElfBasalHpRecovery",
-    "GameSettingValue": 8
+    "GameSettingValue": "8"
   },
   {
     "GameSettingID": "DruidBasalHpRecovery",
-    "GameSettingValue": 12
+    "GameSettingValue": "12"
   },
   {
     "GameSettingID": "HumanBasalMpRecovery",
-    "GameSettingValue": 4.2
+    "GameSettingValue": "4.2"
   },
   {
     "GameSettingID": "ElfBasalMpRecovery",
-    "GameSettingValue": 7.5
+    "GameSettingValue": "7.5"
   },
   {
     "GameSettingID": "DruidBasalＭpRecovery",
-    "GameSettingValue": 3
+    "GameSettingValue": "3"
   },
   {
     "GameSettingID": "AttackSpeedHighFast",
-    "GameSettingValue": 0.9
+    "GameSettingValue": "0.9"
   },
   {
     "GameSettingID": "AttackSpeedFast",
-    "GameSettingValue": 0.8
+    "GameSettingValue": "0.8"
   },
   {
     "GameSettingID": "AttackSpeedMedium",
-    "GameSettingValue": 0.7
+    "GameSettingValue": "0.7"
   },
   {
     "GameSettingID": "AttackSpeedSlow",
-    "GameSettingValue": 0.6
+    "GameSettingValue": "0.6"
   },
   {
     "GameSettingID": "AttackSppedHighSlow",
-    "GameSettingValue": 0.5
+    "GameSettingValue": "0.5"
   },
   {
     "GameSettingID": "MeleeAttackRange",
-    "GameSettingValue": 8
+    "GameSettingValue": "8"
   },
   {
     "GameSettingID": "MonsterActivityIntervalMin",
-    "GameSettingValue": 3
+    "GameSettingValue": "3"
   },
   {
     "GameSettingID": "MonsterActivityIntervalMax",
-    "GameSettingValue": 8
+    "GameSettingValue": "8"
   },
   {
     "GameSettingID": "FirstPhaseBootysLockTime",
-    "GameSettingValue": 15
+    "GameSettingValue": "15"
   },
   {
     "GameSettingID": "SecondPhaseBootysLockTime",
-    "GameSettingValue": 30
+    "GameSettingValue": "30"
   },
   {
     "GameSettingID": "ExpDeathPenalty",
-    "GameSettingValue": 0.1
+    "GameSettingValue": "0.1"
+  },
+  {
+    "GameSettingID": "AdditiveBuffTime",
+    "GameSettingValue": " 0.25"
+  },
+  {
+    "GameSettingID": "AdditiveDebuffTime",
+    "GameSettingValue": "0.25"
+  },
+  {
+    "GameSettingID": "RefreshInterval",
+    "GameSettingValue": "1"
   }
 ]

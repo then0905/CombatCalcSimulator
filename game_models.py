@@ -460,7 +460,12 @@ class GameData:
         # 加載遊戲設定資料
         with open(get_data_path("data","GameSetting.json"), encoding="utf-8") as f:
             gameSetting_data = json.load(f)
-            self.GameSettingDic = {c["GameSettingID"]: GameSettingDataModel(**c) for c in gameSetting_data}        
+            self.GameSettingDic = {
+                c["GameSettingID"]: GameSettingDataModel(
+                    GameSettingID=c["GameSettingID"],
+                    GameSettingValue=float(c["GameSettingValue"])
+                ) for c in gameSetting_data
+            }
             
         # 加載地區資料
         with open(get_data_path("data","Area.json"), encoding="utf-8") as f:
