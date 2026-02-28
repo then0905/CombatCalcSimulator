@@ -101,4 +101,12 @@ Each skill has a `SkillOperationDataList`. `execute_skill_operation()` iterates 
 - **反例**：在 `pass_time` 中寫 `if "InCombatStatus" in self.temp_dict` → 改為在 EventTrigger op 設定 `RefreshInterval` 欄位，`pass_time` 只讀取 `_periodic_triggers` 通用結構。
 - **正例**：`RefreshInterval: 1.0` 寫在 JSON，程式碼讀值驅動行為；未來任何事件類型的定期重評估只需在 JSON 加這個欄位，無需改程式碼。
 
+**函式職責分離（Single Responsibility）。** 每個函式只負責一件事。遇到新功能需求，優先開一個新函式，而非直接在現有函式內加邏輯。
+
+具體原則：
+- 一個函式做太多事時，就應該拆出子函式（即使只有 2~3 行）。
+- 現有函式改動前先確認其職責範圍：超出職責的邏輯不應加在裡面。
+- **反例**：在 `CrowdControlCalculator`（負責計算控制效果數值）裡加詠唱中斷的旗標設定 → 詠唱中斷是另一件事，應獨立成 `interrupt_chant_if_chanting()`，由呼叫端（`status_skill_effect_start`）在合適時機呼叫。
+- **正例**：新增詠唱中斷邏輯 → 在 `BattleCharacter` 開新方法 `interrupt_chant_if_chanting()`，在 `status_skill_effect_start` 的 CC 處理中呼叫，不動 `CrowdControlCalculator`。
+
 **`data/` 目錄下的 JSON 檔案不可直接修改。** 這些檔案由外部 Excel 表格轉換匯入，Claude 不應直接編輯它們。若實作新功能需要新增或修改資料欄位（例如新增 `RefreshInterval`），應向使用者說明需要在 Excel 中補充哪個欄位、填什麼值，由使用者自行處理 Excel → JSON 的匯出流程。
