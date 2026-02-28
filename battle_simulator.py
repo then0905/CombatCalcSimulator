@@ -192,6 +192,35 @@ class BattleCharacter:
             self.subscription_skill_time = 0
             self.subscription_skill_event()
 
+        # 詠唱計時（ChantTime > 0 的技能在此倒數，完成後才執行效果）
+        if "_chanting" in self.temp_dict and self.opponent is not None:
+            chant_data = self.temp_dict["_chanting"]
+            if "_chant_interrupted" in self.temp_dict:
+                # 詠唱被控制狀態中斷
+                skill = chant_data["skill"]
+                self.temp_dict.pop("_chanting")
+                self.temp_dict.pop("_chant_interrupted")
+                self.battle_log.append(battlelog_text_processor({
+                    "caster_text": self.name,
+                    "descript_text": get_text(skill.Name),
+                }, "chantInterrupted"))
+            else:
+                chant_data["timer"] = max(0.0, chant_data["timer"] - dt)
+                if chant_data["timer"] <= 0:
+                    # 詠唱完成，執行技能效果
+                    skill = chant_data["skill"]
+                    self.temp_dict.pop("_chanting")
+                    for resultList in execute_skill_operation(skill, self, self.opponent):
+                        if resultList is None:
+                            continue
+                        if isinstance(resultList, list):
+                            for r in resultList:
+                                if r is not None:
+                                    self.battle_log.append(r[0])
+                        else:
+                            self.battle_log.append(resultList[0])
+                    self.update_hp_mp()
+
         # 定期重新評估的事件觸發（由 EventTrigger 的 RefreshInterval 設定，資料驅動）
         if "_periodic_triggers" in self.temp_dict and self.opponent is not None:
             for entry in self.temp_dict["_periodic_triggers"]:
@@ -458,6 +487,11 @@ class BattleCharacter:
             case "Inhibit":
                 self.controlled_for_skill += value
                 self.controlled_for_attack += value
+
+    def interrupt_chant_if_chanting(self):
+        """若正在詠唱，標記詠唱被中斷（由 status_skill_effect_start 在施加技能限制型 CC 時呼叫）"""
+        if "_chanting" in self.temp_dict:
+            self.temp_dict["_chant_interrupted"] = True
 
     def processRecovery(self, op,effectName:str, caster, target) -> Tuple[str, int, float]:
         """
@@ -953,39 +987,56 @@ class BattleSimulator:
                 skill = next(s for s in attacker.skills if s.SkillID == result)
                 attacker.skill_usage[get_text(skill.Name)] += 1
                 if attacker.action_check(skill):
-                    #print(
-                        #f"{attacker.name} 使用 ：{get_text(skill.Name)} ({skill.SkillID}) 原本魔力為：{attacker.stats["MP"]} 消耗魔力為：{skill.CastMage}")
                     attacker.stats["MP"] -= skill.CastMage
-                    for resultList in execute_skill_operation(skill, attacker, target):
-                        if resultList is None:
-                            print(f"資料有錯喔!: {skill.SkillID}  → temp 本身就是 None")
-                        elif isinstance(resultList, list) and any(x is None for x in resultList):
-                            print(f"資料有錯喔!: {skill.SkillID}  → temp 裡面有 None: {resultList}")
-                        for temp in resultList:
-                            log_msg, damage, attack_timer = temp
-                            self.battle_log.append(log_msg)
+                    if skill.ChantTime > 0:
+                        # 詠唱技能：CD 立即啟動，技能效果等詠唱完成後由 pass_time 執行
+                        attacker.skill_cooldowns[skill.SkillID] = skill.CD
+                        cd_key = f"cd_reduction_{skill.SkillID}"
+                        if cd_key in attacker.temp_dict:
+                            attacker.skill_cooldowns[skill.SkillID] = max(0,
+                                attacker.skill_cooldowns[skill.SkillID] - attacker.temp_dict.pop(cd_key))
+                        attacker.temp_dict["_chanting"] = {"skill": skill, "timer": skill.ChantTime}
+                        attacker.temp_dict.pop("_chant_interrupted", None)
+                        self.battle_log.append(battlelog_text_processor({
+                            "caster_text": attacker.name,
+                            "caster_color": "#636363",
+                            "caster_size": 12,
+                            "descript_text": get_text(skill.Name),
+                            "descript_color": "#4db8ff",
+                        }, "chantStart", skill.ChantTime))
+                        total_attack_timer = skill.ChantTime + (1.0 if skill.Type == "Buff" else 1.8)
+                    else:
+                        # 無詠唱：立即執行技能效果
+                        for resultList in execute_skill_operation(skill, attacker, target):
+                            if resultList is None:
+                                print(f"資料有錯喔!: {skill.SkillID}  → temp 本身就是 None")
+                            elif isinstance(resultList, list) and any(x is None for x in resultList):
+                                print(f"資料有錯喔!: {skill.SkillID}  → temp 裡面有 None: {resultList}")
+                            for temp in resultList:
+                                log_msg, damage, attack_timer = temp
+                                self.battle_log.append(log_msg)
 
-                            attacker.skill_cooldowns[skill.SkillID] = skill.CD
-                            # 套用 HitReduceSec CD 減少
-                            cd_key = f"cd_reduction_{skill.SkillID}"
-                            if cd_key in attacker.temp_dict:
-                                attacker.skill_cooldowns[skill.SkillID] = max(0,
-                                    attacker.skill_cooldowns[skill.SkillID] - attacker.temp_dict.pop(cd_key))
-                            reward += ai.calculate_reward(damage,target.is_alive(),attacker.is_alive())
-                            total_attack_timer += attack_timer
-                            self.damage_data.append({
-                                "attacker":attacker.name,
-                                "target":target.name,
-                                "skill":get_text(skill.Name),
-                                "Damage":damage,
-                            })
-                    self.battle_log.append(battlelog_text_processor({
-                        "caster_text": attacker.name,
-                        "caster_color": "#636363",
-                        "caster_size": 12,
-                        "descript_text": get_text(skill.Name),
-                        "descript_color": "#ff0000",
-                    }, "skillTimer", f"{1 if skill.Type == "Buff" else 1.8}"))
+                                attacker.skill_cooldowns[skill.SkillID] = skill.CD
+                                # 套用 HitReduceSec CD 減少
+                                cd_key = f"cd_reduction_{skill.SkillID}"
+                                if cd_key in attacker.temp_dict:
+                                    attacker.skill_cooldowns[skill.SkillID] = max(0,
+                                        attacker.skill_cooldowns[skill.SkillID] - attacker.temp_dict.pop(cd_key))
+                                reward += ai.calculate_reward(damage,target.is_alive(),attacker.is_alive())
+                                total_attack_timer += attack_timer
+                                self.damage_data.append({
+                                    "attacker":attacker.name,
+                                    "target":target.name,
+                                    "skill":get_text(skill.Name),
+                                    "Damage":damage,
+                                })
+                        self.battle_log.append(battlelog_text_processor({
+                            "caster_text": attacker.name,
+                            "caster_color": "#636363",
+                            "caster_size": 12,
+                            "descript_text": get_text(skill.Name),
+                            "descript_color": "#ff0000",
+                        }, "skillTimer", f"{1 if skill.Type == "Buff" else 1.8}"))
                 else:
                     reward = -0.1  # 不可施放技能 懲罰值
 
@@ -1226,36 +1277,55 @@ class BattleSimulator:
                 attacker.skill_usage[get_text(skill.Name)] += 1
                 if attacker.action_check(skill):
                     attacker.stats["MP"] -= skill.CastMage
-                    for resultList in execute_skill_operation(skill, attacker, target):
-                        if resultList is None:
-                            continue
-                        elif isinstance(resultList, list) and any(x is None for x in resultList):
-                            continue
-                        for temp in resultList:
-                            log_msg, damage, attack_timer = temp
-                            self.battle_log.append(log_msg)
+                    if skill.ChantTime > 0:
+                        # 詠唱技能：CD 立即啟動，技能效果等詠唱完成後由 pass_time 執行
+                        attacker.skill_cooldowns[skill.SkillID] = skill.CD
+                        cd_key = f"cd_reduction_{skill.SkillID}"
+                        if cd_key in attacker.temp_dict:
+                            attacker.skill_cooldowns[skill.SkillID] = max(0,
+                                attacker.skill_cooldowns[skill.SkillID] - attacker.temp_dict.pop(cd_key))
+                        attacker.temp_dict["_chanting"] = {"skill": skill, "timer": skill.ChantTime}
+                        attacker.temp_dict.pop("_chant_interrupted", None)
+                        self.battle_log.append(battlelog_text_processor({
+                            "caster_text": attacker.name,
+                            "caster_color": "#636363",
+                            "caster_size": 12,
+                            "descript_text": get_text(skill.Name),
+                            "descript_color": "#4db8ff",
+                        }, "chantStart", skill.ChantTime))
+                        total_attack_timer = skill.ChantTime + (1.0 if skill.Type == "Buff" else 1.8)
+                    else:
+                        # 無詠唱：立即執行技能效果
+                        for resultList in execute_skill_operation(skill, attacker, target):
+                            if resultList is None:
+                                continue
+                            elif isinstance(resultList, list) and any(x is None for x in resultList):
+                                continue
+                            for temp in resultList:
+                                log_msg, damage, attack_timer = temp
+                                self.battle_log.append(log_msg)
 
-                            attacker.skill_cooldowns[skill.SkillID] = skill.CD
-                            # 套用 HitReduceSec CD 減少
-                            cd_key = f"cd_reduction_{skill.SkillID}"
-                            if cd_key in attacker.temp_dict:
-                                attacker.skill_cooldowns[skill.SkillID] = max(0,
-                                    attacker.skill_cooldowns[skill.SkillID] - attacker.temp_dict.pop(cd_key))
-                            reward += ai.calculate_reward(damage, target.is_alive(), attacker.is_alive())
-                            total_attack_timer += attack_timer
-                            self.damage_data.append({
-                                "attacker": attacker.name,
-                                "target": target.name,
-                                "skill": get_text(skill.Name),
-                                "Damage": damage,
-                            })
-                    self.battle_log.append(battlelog_text_processor({
-                        "caster_text": attacker.name,
-                        "caster_color": "#636363",
-                        "caster_size": 12,
-                        "descript_text": get_text(skill.Name),
-                        "descript_color": "#ff0000",
-                    }, "skillTimer", f"{1 if skill.Type == 'Buff' else 1.8}"))
+                                attacker.skill_cooldowns[skill.SkillID] = skill.CD
+                                # 套用 HitReduceSec CD 減少
+                                cd_key = f"cd_reduction_{skill.SkillID}"
+                                if cd_key in attacker.temp_dict:
+                                    attacker.skill_cooldowns[skill.SkillID] = max(0,
+                                        attacker.skill_cooldowns[skill.SkillID] - attacker.temp_dict.pop(cd_key))
+                                reward += ai.calculate_reward(damage, target.is_alive(), attacker.is_alive())
+                                total_attack_timer += attack_timer
+                                self.damage_data.append({
+                                    "attacker": attacker.name,
+                                    "target": target.name,
+                                    "skill": get_text(skill.Name),
+                                    "Damage": damage,
+                                })
+                        self.battle_log.append(battlelog_text_processor({
+                            "caster_text": attacker.name,
+                            "caster_color": "#636363",
+                            "caster_size": 12,
+                            "descript_text": get_text(skill.Name),
+                            "descript_color": "#ff0000",
+                        }, "skillTimer", f"{1 if skill.Type == 'Buff' else 1.8}"))
                 else:
                     reward = -0.1
                     ai.record_result(reward, False)

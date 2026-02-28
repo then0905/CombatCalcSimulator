@@ -321,6 +321,8 @@ def status_skill_effect_start(op: SkillOperationData, attacker, defender) -> Tup
         case "CrowdControl":
             defender.CrowdControlCalculator(op, 1)
             defender.add_debuff_effect(op)
+            # 控制狀態 中斷詠唱
+            defender.interrupt_chant_if_chanting()
             # 觸發 InCrowdControl 事件（被控制時）
             defender.battle_log.extend(defender.fire_event_trigger("InCrowdControl", attacker))
             return (battlelog_text_processor({

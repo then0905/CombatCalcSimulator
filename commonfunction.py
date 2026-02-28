@@ -227,6 +227,15 @@ def battlelog_text_processor(input_log_dic,log_type:str,other = None):
                 f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>'
                 f' 因為{other}，啟用了'
                 f' [ <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size> ] 的效果')
+        case "chantStart":
+            return (
+                f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>'
+                f' 開始詠唱 [ <color=#4db8ff>{log_dic["descript_text"]}</color> ]'
+                f' 需要 {other} 秒')
+        case "chantInterrupted":
+            return (
+                f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>'
+                f' 的 [ <color=#4db8ff>{log_dic["descript_text"]}</color> ] 詠唱被中斷了！')
 
         # endregion
 
