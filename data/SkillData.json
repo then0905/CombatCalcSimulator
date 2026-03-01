@@ -1041,18 +1041,18 @@
       },
       {
         "SkillID": "Berserker_8",
+        "SkillComponentID": "EventTrigger",
+        "ConditionOR": [
+          "InCombatStatus_True"
+        ]
+      },
+      {
+        "SkillID": "Berserker_8",
         "SkillComponentID": "ContinuanceBuff",
         "EffectValue": 10,
         "InfluenceStatus": "DEF",
-        "AddType": "Value",
-        "ConditionOR": [
-          "InCombatStatus_True"
-        ],
         "EffectDurationTime": 5,
-        "EffectRecive": 0,
-        "Bonus": [
-          "Subscription"
-        ]
+        "EffectRecive": 0
       },
       {
         "SkillID": "Berserker_8",
@@ -1060,14 +1060,8 @@
         "EffectValue": 120,
         "InfluenceStatus": "MaxHP",
         "AddType": "Value",
-        "ConditionOR": [
-          "InCombatStatus_True"
-        ],
         "EffectDurationTime": 5,
-        "EffectRecive": 0,
-        "Bonus": [
-          "Subscription"
-        ]
+        "EffectRecive": 0
       }
     ]
   },
