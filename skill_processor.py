@@ -9,7 +9,7 @@ def execute_skill_operation(skillData: SkillData, attacker, defender)-> Optional
     returnResult = []
 
     # 普通攻擊特殊處理
-    if skillData.Name == "普通攻擊":
+    if skillData.SkillID == "NORMAL_ATTACK":
         #模擬技能端的資料儲存方式 參考Damage組件
         attackerResult = attacker.HitCalculator(skillData, defender)
         for result in attackerResult:
@@ -676,6 +676,12 @@ def event_condition_check(key: str, value: str, caster) -> bool:
 
 def _calculate_dot_tick_damage(skillData: SkillData, op, attacker) -> int:
     """計算 DotDamage 每秒傷害值"""
-    base_atk = attacker.stats.get("MeleeATK", 0)
+    match skillData.AdditionMode:
+        case "RemoteATK":
+            base_atk = attacker.stats.get("RemoteATK", 0)
+        case "MageATK":
+            base_atk = attacker.stats.get("MageATK", 0)
+        case _:
+            base_atk = attacker.stats.get("MeleeATK", 0)
     effect_value = op.EffectValue if op.EffectValue > 0 else skillData.Damage
     return round(base_atk * effect_value)

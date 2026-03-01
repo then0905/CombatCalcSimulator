@@ -78,7 +78,7 @@ class BattleCharacter:
         """
         攻擊指令許可確定
         """
-        if (skill.Name == "普通攻擊"):
+        if skill.SkillID == "NORMAL_ATTACK":
             return self.stats["HP"] > 0 and self.controlled_for_attack <= 0
         else:
             return self.stats["HP"] > 0 and self.controlled_for_skill <= 0
@@ -90,8 +90,25 @@ class BattleCharacter:
         """
         獨立計時器
         """
+        # 技能、道具 冷卻處理
+        self._tick_cooldowns(dt)
+        # 技能、道具 Buff 時間處理
+        self._tick_buffs(dt)
+        # 技能、道具 Debuff 時間處理
+        self._tick_debuffs(dt)
+        # 血量、魔力 自然恢復 處理
+        self._tick_recovery(dt)
+        # 疊層效果
+        self._tick_additive_effects(dt)
+        # 訂閱起來的技能執行效果
+        self._tick_subscriptions(dt)
+        # 詠唱計時
+        self._tick_chanting(dt)
+        # 需重複確認是否刷新的訂閱效果
+        self._tick_periodic_triggers(dt)
 
-        # 技能冷卻遞減
+    def _tick_cooldowns(self, dt: float):
+        """技能與道具冷卻遞減"""
         for skill_id in list(self.skill_cooldowns):
             if self.skill_cooldowns[skill_id] > 0:
                 self.skill_cooldowns[skill_id] = max(0, self.skill_cooldowns[skill_id] - dt)
@@ -103,13 +120,14 @@ class BattleCharacter:
                 if self.item_cooldowns[item_id] == 0:
                     del self.item_cooldowns[item_id]
 
-        #技能Buff時間遞減
+    def _tick_buffs(self, dt: float):
+        """技能 Buff 與道具 Buff 持續時間遞減，到期時反向套用效果"""
         for buff_skill_id in list(self.buff_skill):
             skillData, skillDuration = self.buff_skill[buff_skill_id]
             skillDuration = max(0, skillDuration - dt)
             self.buff_skill[buff_skill_id] = (skillData, skillDuration)
-            if (skillDuration == 0):
-                stack = clamp(self.buff_bar.get_effect_stack(buff_skill_id),1,self.buff_bar.get_effect_stack(buff_skill_id))
+            if skillDuration == 0:
+                stack = clamp(self.buff_bar.get_effect_stack(buff_skill_id), 1, self.buff_bar.get_effect_stack(buff_skill_id))
                 for op in skillData.SkillOperationDataList:
                     self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"),
                                                     -1 * op.EffectValue * stack)
@@ -119,32 +137,35 @@ class BattleCharacter:
             itemData, itemDuration = self.buff_item[buff_item_id]
             itemDuration = max(0, itemDuration - dt)
             self.buff_item[buff_item_id] = (itemData, itemDuration)
-            if (itemDuration == 0):
+            if itemDuration == 0:
                 stack = self.buff_bar.get_effect_stack(buff_item_id)
                 for op in itemData.ItemEffectDataList:
                     self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"),
                                                     -1 * op.EffectValue * stack)
                 self.buff_item.pop(buff_item_id, None)
                 self.buff_bar.remove_effect(buff_item_id)
-        #負面狀態遞減
+
+    def _tick_debuffs(self, dt: float):
+        """負面狀態持續時間遞減，到期時結束效果"""
         for debuff_id in list(self.debuff_skill):
             op, debuffDuration = self.debuff_skill[debuff_id]
             debuffDuration = max(0, debuffDuration - dt)
             self.debuff_skill[debuff_id] = (op, debuffDuration)
-            if (debuffDuration == 0):
+            if debuffDuration == 0:
                 log, dmg, cd = status_skill_effect_end(op, self)
                 self.battle_log.append(log)
                 del self.debuff_skill[debuff_id]
                 self.debuff_bar.remove_effect(debuff_id)
 
-        # 血量自然恢復計時
-        if ("HP_Recovery" in self.stats):
-            if (self.hp_recovery_time < GameData.Instance.GameSettingDic["HpRecoverySec"].GameSettingValue):
+    def _tick_recovery(self, dt: float):
+        """HP 與 MP 自然恢復計時"""
+        if "HP_Recovery" in self.stats:
+            if self.hp_recovery_time < GameData.Instance.GameSettingDic["HpRecoverySec"].GameSettingValue:
                 self.hp_recovery_time += dt
             else:
                 self.hp_recovery_time = 0
                 self.stats["HP"] = clamp(self.stats["HP"] + self.stats["HP_Recovery"], 0,
-                                                        self.stats["MaxHP"])
+                                         self.stats["MaxHP"])
                 self.update_hp_mp()
                 self.battle_log.append(battlelog_text_processor({
                     "caster_text": self.name,
@@ -152,15 +173,13 @@ class BattleCharacter:
                     "descript_text": self.stats["HP_Recovery"],
                     "descript_color": "#ff0000",
                 }, "naturalHpRecovery"))
-
-        # 魔力自然恢復計時
-        if ("MP_Recovery" in self.stats):
-            if (self.mp_recovery_time < GameData.Instance.GameSettingDic["MpRecoverySec"].GameSettingValue):
+        if "MP_Recovery" in self.stats:
+            if self.mp_recovery_time < GameData.Instance.GameSettingDic["MpRecoverySec"].GameSettingValue:
                 self.mp_recovery_time += dt
             else:
                 self.mp_recovery_time = 0
                 self.stats["MP"] = clamp(self.stats["MP"] + self.stats["MP_Recovery"], 0,
-                                                        self.stats["MaxMP"])
+                                         self.stats["MaxMP"])
                 self.update_hp_mp()
                 self.battle_log.append(battlelog_text_processor({
                     "caster_text": self.name,
@@ -169,65 +188,65 @@ class BattleCharacter:
                     "descript_color": "#ff0000",
                 }, "naturalMpRecovery"))
 
-        #持續疊加的Buff
-        if (self.additive_buff_time < GameData.Instance.GameSettingDic["AdditiveBuffTime"].GameSettingValue):
+    def _tick_additive_effects(self, dt: float):
+        """持續疊加的 Buff / Debuff 計時"""
+        if self.additive_buff_time < GameData.Instance.GameSettingDic["AdditiveBuffTime"].GameSettingValue:
             self.additive_buff_time += dt
         else:
             self.additive_buff_time = 0
             self.additive_buff_event()
-
-
-        #持續疊加的Debuff
-        if (self.additive_debuff_time < GameData.Instance.GameSettingDic["AdditiveDebuffTime"].GameSettingValue):
+        if self.additive_debuff_time < GameData.Instance.GameSettingDic["AdditiveDebuffTime"].GameSettingValue:
             self.additive_debuff_time += dt
         else:
             self.additive_debuff_time = 0
             self.additive_debuff_event()
 
-
-        #技能訂閱的呼叫計時器
-        if(self.subscription_skill_time < 1):
+    def _tick_subscriptions(self, dt: float):
+        """技能訂閱事件每秒觸發計時"""
+        if self.subscription_skill_time < 1:
             self.subscription_skill_time += dt
         else:
             self.subscription_skill_time = 0
             self.subscription_skill_event()
 
-        # 詠唱計時（ChantTime > 0 的技能在此倒數，完成後才執行效果）
-        if "_chanting" in self.temp_dict and self.opponent is not None:
-            chant_data = self.temp_dict["_chanting"]
-            if "_chant_interrupted" in self.temp_dict:
-                # 詠唱被控制狀態中斷
-                skill = chant_data["skill"]
-                self.temp_dict.pop("_chanting")
-                self.temp_dict.pop("_chant_interrupted")
-                self.battle_log.append(battlelog_text_processor({
-                    "caster_text": self.name,
-                    "descript_text": get_text(skill.Name),
-                }, "chantInterrupted"))
-            else:
-                chant_data["timer"] = max(0.0, chant_data["timer"] - dt)
-                if chant_data["timer"] <= 0:
-                    # 詠唱完成，執行技能效果
-                    skill = chant_data["skill"]
-                    self.temp_dict.pop("_chanting")
-                    for resultList in execute_skill_operation(skill, self, self.opponent):
-                        if resultList is None:
-                            continue
-                        if isinstance(resultList, list):
-                            for r in resultList:
-                                if r is not None:
-                                    self.battle_log.append(r[0])
-                        else:
-                            self.battle_log.append(resultList[0])
-                    self.update_hp_mp()
+    def _tick_chanting(self, dt: float):
+        """詠唱計時：倒數完成後執行技能效果；被 CC 中斷則取消"""
+        if "_chanting" not in self.temp_dict or self.opponent is None:
+            return
+        chant_data = self.temp_dict["_chanting"]
+        if "_chant_interrupted" in self.temp_dict:
+            skill = chant_data["skill"]
+            self.temp_dict.pop("_chanting")
+            self.temp_dict.pop("_chant_interrupted")
+            self.battle_log.append(battlelog_text_processor({
+                "caster_text": self.name,
+                "descript_text": get_text(skill.Name),
+            }, "chantInterrupted"))
+            return
+        chant_data["timer"] = max(0.0, chant_data["timer"] - dt)
+        if chant_data["timer"] <= 0:
+            skill = chant_data["skill"]
+            self.temp_dict.pop("_chanting")
+            for resultList in execute_skill_operation(skill, self, self.opponent):
+                if resultList is None:
+                    continue
+                if isinstance(resultList, list):
+                    for r in resultList:
+                        if r is not None:
+                            self.battle_log.append(r[0])
+                else:
+                    self.battle_log.append(resultList[0])
+            self.update_hp_mp()
 
-        # 定期重新評估的事件觸發（由 EventTrigger 的 RefreshInterval 設定，資料驅動）
-        if "_periodic_triggers" in self.temp_dict and self.opponent is not None:
-            for entry in self.temp_dict["_periodic_triggers"]:
-                entry[2] += dt
-                if entry[2] >= entry[1]:
-                    entry[2] = 0.0
-                    self.battle_log.extend(self.fire_event_trigger(entry[0], self.opponent))
+    def _tick_periodic_triggers(self, dt: float):
+        """定期重新評估的事件觸發（由 EventTrigger 的 RefreshInterval 設定，資料驅動）"""
+        if "_periodic_triggers" not in self.temp_dict or self.opponent is None:
+            return
+        for entry in self.temp_dict["_periodic_triggers"]:
+            entry[2] += dt
+            if entry[2] >= entry[1]:
+                entry[2] = 0.0
+                self.battle_log.extend(self.fire_event_trigger(entry[0], self.opponent))
 
     def use_item_id(self, itemid) -> Tuple[str, int, float]:
         for idx, (item, count) in enumerate(self.items):
@@ -540,7 +559,7 @@ class BattleCharacter:
         """
         selfHit = 0;
         if self.characterType:
-            if (skill.Name != "普通攻擊"):
+            if skill.SkillID != "NORMAL_ATTACK":
                 match skill.AdditionMode:
                     case "MeleeATK":
                         selfHit = self.stats["MeleeHit"];
@@ -631,7 +650,7 @@ class BattleCharacter:
         selfATK = 0;
         targetDEF = 0;
         if self.characterType:
-            if skill.Name != "普通攻擊":
+            if skill.SkillID != "NORMAL_ATTACK":
                 match skill.AdditionMode:
                     case "MeleeATK":
                         selfATK = self.stats["MeleeATK"];
@@ -937,21 +956,44 @@ class BattleSimulator:
         """
         AI 選擇&結果
         """
-        reward = 0
-        total_attack_timer = 0
-        match (result):
+        # 接收 回傳的AI行動結果
+        result_tuple = self._execute_action(result, attacker, target)
+        if result_tuple is None:
+            # 無法行動（被控制）：懲罰並稍後重試
+            ai.record_result(-0.1, False)
+            self._schedule(100, lambda: self.attack_loop(attacker, target))
+            return
+
+        reward, total_attack_timer = result_tuple
+        self.gui.display_battle_log(self.get_battle_log())
+        self.update_hp_mp()
+        next_state = ai.get_state(attacker, target)
+        done = (not attacker.is_alive()) or not (target.is_alive())
+        ai.record_result(reward, done)
+        attacker.attackTimerFunc = self._schedule(int(total_attack_timer * 1000),
+                                                    lambda: self.attack_loop(attacker, target))
+
+    def _execute_action(self, action_id: str, attacker: BattleCharacter, target: BattleCharacter) -> Optional[Tuple[float, float]]:
+        """
+        執行一次 AI 行動（普攻 / 道具 / 技能）。
+        回傳 (reward, total_attack_timer)；若無法執行（被控制）則回傳 None。
+        """
+        ai = attacker.ai
+        reward = 0.0
+        total_attack_timer = 0.0
+
+        match action_id:
             case "NORMAL_ATTACK":
                 normal_attack = SkillData(
                     SkillID="NORMAL_ATTACK",
                     Name="普通攻擊",
                     Damage=1,
                     CastMage=0,
-                    # 其他必要參數...
                 )
                 if attacker.action_check(normal_attack):
                     for log_msg, damage, attack_timer in execute_skill_operation(normal_attack, attacker, target):
                         self.battle_log.append(log_msg)
-                        reward += ai.calculate_reward(damage,target.is_alive(),attacker.is_alive())
+                        reward += ai.calculate_reward(damage, target.is_alive(), attacker.is_alive())
                         total_attack_timer += attack_timer
                         self.battle_log.append(battlelog_text_processor({
                             "caster_text": attacker.name,
@@ -967,24 +1009,16 @@ class BattleSimulator:
                             "Damage": damage,
                         })
                 else:
-                    reward = -0.1  # 不可施放技能 懲罰值
+                    return None  # 被控制，無法行動
 
-                    # 依然要呼叫 record_result，確保 Buffer 長度對齊
-                    # 這裡 done 通常是 False，因為戰鬥還沒結束，只是這回合浪費了
-                    ai.record_result(reward, False)
-                    self._schedule(
-                        100, lambda: self.attack_loop(attacker, target)
-                    )
-                    return
-            #道具
-            case str() if result.startswith("USE_ITEM:"):
-                log_msg, damage, attack_timer = attacker.use_item_id(result.replace("USE_ITEM:", ""))
+            case str() if action_id.startswith("USE_ITEM:"):
+                log_msg, damage, attack_timer = attacker.use_item_id(action_id.replace("USE_ITEM:", ""))
                 self.battle_log.append(log_msg)
-                reward += ai.calculate_reward(damage,target.is_alive(),attacker.is_alive())
+                reward += ai.calculate_reward(damage, target.is_alive(), attacker.is_alive())
                 total_attack_timer += attack_timer
-            #施放技能
+
             case _:
-                skill = next(s for s in attacker.skills if s.SkillID == result)
+                skill = next(s for s in attacker.skills if s.SkillID == action_id)
                 attacker.skill_usage[get_text(skill.Name)] += 1
                 if attacker.action_check(skill):
                     attacker.stats["MP"] -= skill.CastMage
@@ -1010,25 +1044,25 @@ class BattleSimulator:
                         for resultList in execute_skill_operation(skill, attacker, target):
                             if resultList is None:
                                 print(f"資料有錯喔!: {skill.SkillID}  → temp 本身就是 None")
+                                continue
                             elif isinstance(resultList, list) and any(x is None for x in resultList):
                                 print(f"資料有錯喔!: {skill.SkillID}  → temp 裡面有 None: {resultList}")
                             for temp in resultList:
                                 log_msg, damage, attack_timer = temp
                                 self.battle_log.append(log_msg)
-
                                 attacker.skill_cooldowns[skill.SkillID] = skill.CD
                                 # 套用 HitReduceSec CD 減少
                                 cd_key = f"cd_reduction_{skill.SkillID}"
                                 if cd_key in attacker.temp_dict:
                                     attacker.skill_cooldowns[skill.SkillID] = max(0,
                                         attacker.skill_cooldowns[skill.SkillID] - attacker.temp_dict.pop(cd_key))
-                                reward += ai.calculate_reward(damage,target.is_alive(),attacker.is_alive())
+                                reward += ai.calculate_reward(damage, target.is_alive(), attacker.is_alive())
                                 total_attack_timer += attack_timer
                                 self.damage_data.append({
-                                    "attacker":attacker.name,
-                                    "target":target.name,
-                                    "skill":get_text(skill.Name),
-                                    "Damage":damage,
+                                    "attacker": attacker.name,
+                                    "target": target.name,
+                                    "skill": get_text(skill.Name),
+                                    "Damage": damage,
                                 })
                         self.battle_log.append(battlelog_text_processor({
                             "caster_text": attacker.name,
@@ -1036,25 +1070,11 @@ class BattleSimulator:
                             "caster_size": 12,
                             "descript_text": get_text(skill.Name),
                             "descript_color": "#ff0000",
-                        }, "skillTimer", f"{1 if skill.Type == "Buff" else 1.8}"))
+                        }, "skillTimer", f"{1 if skill.Type == 'Buff' else 1.8}"))
                 else:
-                    reward = -0.1  # 不可施放技能 懲罰值
+                    return None  # 被控制，無法施放技能
 
-                    # 依然要呼叫 record_result，確保 Buffer 長度對齊
-                    # 這裡 done 通常是 False，因為戰鬥還沒結束，只是這回合浪費了
-                    ai.record_result(reward, False)
-                    self._schedule(
-                        100, lambda: self.attack_loop(attacker, target)
-                    )
-                    return
-
-        self.gui.display_battle_log(self.get_battle_log())
-        self.update_hp_mp()
-        next_state = ai.get_state(attacker, target)
-        done =(not attacker.is_alive()) or not (target.is_alive())
-        ai.record_result(reward,done)
-        attacker.attackTimerFunc = self._schedule(int(total_attack_timer * 1000),
-                                                    lambda: self.attack_loop(attacker, target))
+        return reward, total_attack_timer
 
     def simulate_battle(self, player: BattleCharacter, enemy: BattleCharacter):
         """開啟戰鬥模擬"""
@@ -1232,106 +1252,13 @@ class BattleSimulator:
         ai = attacker.ai
         action_id, state = ai.choose_action(attacker, target)
 
-        reward = 0
-        total_attack_timer = 0
+        result_tuple = self._execute_action(action_id, attacker, target)
+        if result_tuple is None:
+            # 無法行動（被控制）：懲罰並稍後重試
+            ai.record_result(-0.1, False)
+            return 0.1
 
-        match (action_id):
-            case "NORMAL_ATTACK":
-                normal_attack = SkillData(
-                    SkillID="NORMAL_ATTACK",
-                    Name="普通攻擊",
-                    Damage=1,
-                    CastMage=0,
-                )
-                if attacker.action_check(normal_attack):
-                    for log_msg, damage, attack_timer in execute_skill_operation(normal_attack, attacker, target):
-                        self.battle_log.append(log_msg)
-                        reward += ai.calculate_reward(damage, target.is_alive(), attacker.is_alive())
-                        total_attack_timer += attack_timer
-                        self.battle_log.append(battlelog_text_processor({
-                            "caster_text": attacker.name,
-                            "caster_color": "#636363",
-                            "caster_size": 12,
-                            "descript_text": "普攻",
-                            "descript_color": "#ff0000",
-                        }, "normalAttckTimer", f"{total_attack_timer:.2f}"))
-                        self.damage_data.append({
-                            "attacker": attacker.name,
-                            "target": target.name,
-                            "skill": "NORMAL_ATTACK",
-                            "Damage": damage,
-                        })
-                else:
-                    reward = -0.1
-                    ai.record_result(reward, False)
-                    return 0.1  # 被控制，稍後重試
-
-            case str() if action_id.startswith("USE_ITEM:"):
-                log_msg, damage, attack_timer = attacker.use_item_id(action_id.replace("USE_ITEM:", ""))
-                self.battle_log.append(log_msg)
-                reward += ai.calculate_reward(damage, target.is_alive(), attacker.is_alive())
-                total_attack_timer += attack_timer
-
-            case _:
-                skill = next(s for s in attacker.skills if s.SkillID == action_id)
-                attacker.skill_usage[get_text(skill.Name)] += 1
-                if attacker.action_check(skill):
-                    attacker.stats["MP"] -= skill.CastMage
-                    if skill.ChantTime > 0:
-                        # 詠唱技能：CD 立即啟動，技能效果等詠唱完成後由 pass_time 執行
-                        attacker.skill_cooldowns[skill.SkillID] = skill.CD
-                        cd_key = f"cd_reduction_{skill.SkillID}"
-                        if cd_key in attacker.temp_dict:
-                            attacker.skill_cooldowns[skill.SkillID] = max(0,
-                                attacker.skill_cooldowns[skill.SkillID] - attacker.temp_dict.pop(cd_key))
-                        attacker.temp_dict["_chanting"] = {"skill": skill, "timer": skill.ChantTime}
-                        attacker.temp_dict.pop("_chant_interrupted", None)
-                        self.battle_log.append(battlelog_text_processor({
-                            "caster_text": attacker.name,
-                            "caster_color": "#636363",
-                            "caster_size": 12,
-                            "descript_text": get_text(skill.Name),
-                            "descript_color": "#4db8ff",
-                        }, "chantStart", skill.ChantTime))
-                        total_attack_timer = skill.ChantTime + (1.0 if skill.Type == "Buff" else 1.8)
-                    else:
-                        # 無詠唱：立即執行技能效果
-                        for resultList in execute_skill_operation(skill, attacker, target):
-                            if resultList is None:
-                                continue
-                            elif isinstance(resultList, list) and any(x is None for x in resultList):
-                                continue
-                            for temp in resultList:
-                                log_msg, damage, attack_timer = temp
-                                self.battle_log.append(log_msg)
-
-                                attacker.skill_cooldowns[skill.SkillID] = skill.CD
-                                # 套用 HitReduceSec CD 減少
-                                cd_key = f"cd_reduction_{skill.SkillID}"
-                                if cd_key in attacker.temp_dict:
-                                    attacker.skill_cooldowns[skill.SkillID] = max(0,
-                                        attacker.skill_cooldowns[skill.SkillID] - attacker.temp_dict.pop(cd_key))
-                                reward += ai.calculate_reward(damage, target.is_alive(), attacker.is_alive())
-                                total_attack_timer += attack_timer
-                                self.damage_data.append({
-                                    "attacker": attacker.name,
-                                    "target": target.name,
-                                    "skill": get_text(skill.Name),
-                                    "Damage": damage,
-                                })
-                        self.battle_log.append(battlelog_text_processor({
-                            "caster_text": attacker.name,
-                            "caster_color": "#636363",
-                            "caster_size": 12,
-                            "descript_text": get_text(skill.Name),
-                            "descript_color": "#ff0000",
-                        }, "skillTimer", f"{1 if skill.Type == 'Buff' else 1.8}"))
-                else:
-                    reward = -0.1
-                    ai.record_result(reward, False)
-                    return 0.1  # 被控制，稍後重試
-
-        # 記錄 AI 結果
+        reward, total_attack_timer = result_tuple
         done = (not attacker.is_alive()) or (not target.is_alive())
         ai.record_result(reward, done)
 
