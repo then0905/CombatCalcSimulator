@@ -8,7 +8,7 @@ from game_models import GameData, ItemsDic, SkillData, SkillOperationData, Monst
 from typing import Tuple
 from commonfunction import clamp, battlelog_text_processor, get_text, get_time_stap
 from skill_processor import (execute_skill_operation, execute_item_operation,
-                             status_skill_effect_end, skill_all_condition_process, skill_condition_process,
+                             status_skill_effect_end, skill_all_condition_process,
                              skill_continuancebuff_bonus_processor, event_trigger_condition_process)
 from status_operation import StatusValues
 from AICombatAction import ai_action
@@ -33,7 +33,7 @@ class BattleCharacter:
     items: List[Tuple[ItemDataModel, int]]
     characterType: bool  #當前攻擊者類型 True:人物 False:怪物
     attackTimer: float = 0.0  #普通攻擊計時器
-    skill_usage: Dict = field(default_factory=dict)  # ✅ 修正
+    skill_usage: Dict = field(default_factory=dict)
 
     #UI物件
     buff_bar: Optional[object] = None  #buff效果提示欄
@@ -334,54 +334,25 @@ class BattleCharacter:
         #檢查Bonus資料
 
         if(op.Bonus is not None):
-            temp = skill_continuancebuff_bonus_processor(self,op)
-            match(temp):
-                case int():
-                    temp_id = get_time_stap(skillData.SkillID)
-                    self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue*temp)
-                    #疊層最大值
-                    max = int(next(
-                            (x for x in GameData.Instance.SkillDataDic[op.Bonus[1]].SkillOperationDataList
-                                if x.SkillComponentID == "AdditiveBuff"), None
-                            ).Bonus[0])
-                    #疊層獎勵處理
-                    if (temp/max) >= 0.85:
-                        reward = 20.0  # 接近滿層釋放，大獎勵
-                    if (temp/max) >= 0.6:
-                        reward = 10.0  # 高層釋放，大獎勵
-                    elif (temp/max) >= 0.3:
-                        reward = 5.0  # 普通層數，小獎勵
-                    else:
-                        reward  = -10.0  # 低層數浪費，懲罰
-
-                #訂閱技能
-                case "Subscription":
-
-                    def SubscriptionSkillEffect(subscriptionSkillOp,temp_id):
-
-                        #先做條件檢查
-                        if(skill_condition_process(self,subscriptionSkillOp)):
-                            #檢查buff技能是否再做用中
-                            subscriptionSkillId = next((x for x in self.buff_skill.keys() if x == temp_id), None)
-                            #若正再做用 刷新時間
-                            if subscriptionSkillId is not None:
-                                self.buff_skill[subscriptionSkillId] = (skillData, subscriptionSkillOp.EffectDurationTime)
-                            #若未再做用 開始作用
-                            else:
-                                self.SkillEffectStatusOperation(subscriptionSkillOp.InfluenceStatus, (subscriptionSkillOp.AddType == "Rate"), subscriptionSkillOp.EffectValue)
-                                self.buff_bar.add_skill_effect(temp_id, skillData)
-                                self.buff_skill[temp_id] = (skillData, subscriptionSkillOp.EffectDurationTime)
-
-                    temp_id = get_time_stap(skillData.SkillID)
-                    self.subscription_skill_event += lambda: SubscriptionSkillEffect(op,temp_id)
-
-                    return 0
-
-                case _:
-                    temp_id = get_time_stap(skillData.SkillID)
-                    self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
-
-            self.buff_bar.add_skill_effect(temp_id, skillData,temp)
+            # Stack 疊層型：消耗疊層數並套用效果
+            stack = skill_continuancebuff_bonus_processor(self, op)
+            temp_id = get_time_stap(skillData.SkillID)
+            self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue * stack)
+            #疊層最大值
+            max_stack = int(next(
+                    (x for x in GameData.Instance.SkillDataDic[op.Bonus[1]].SkillOperationDataList
+                        if x.SkillComponentID == "AdditiveBuff"), None
+                    ).Bonus[0])
+            #疊層獎勵處理
+            if (stack / max_stack) >= 0.85:
+                reward = 20.0  # 接近滿層釋放，大獎勵
+            elif (stack / max_stack) >= 0.6:
+                reward = 10.0  # 高層釋放，中獎勵
+            elif (stack / max_stack) >= 0.3:
+                reward = 5.0  # 普通層數，小獎勵
+            else:
+                reward = -10.0  # 低層數浪費，懲罰
+            self.buff_bar.add_skill_effect(temp_id, skillData, stack)
             self.buff_skill[temp_id] = (skillData, op.EffectDurationTime)
         else:
             self.buff_bar.add_skill_effect(skillData.SkillID, skillData)

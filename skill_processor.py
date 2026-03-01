@@ -521,17 +521,12 @@ def skill_utility_processor(caster,op):
             }, "removeAllCC"), 0, 0))
     return result
 
-def skill_continuancebuff_bonus_processor(caster,op):
-    """持續型buff技能的Bonus資料處理"""
-    temp_bonus_data = op.Bonus
-    match temp_bonus_data[0]:
-        case "Stack":
-            key = temp_bonus_data[1]
-            stack = caster.temp_dict.get(key, 0)
-            caster.temp_dict.pop(temp_bonus_data[1], None)
-            return int(stack)
-        case _:
-            return temp_bonus_data[0]
+def skill_continuancebuff_bonus_processor(caster, op) -> int:
+    """持續型buff技能的Stack疊層數讀取：消耗 temp_dict 中的疊層計數並回傳"""
+    key = op.Bonus[1]
+    stack = caster.temp_dict.get(key, 0)
+    caster.temp_dict.pop(key, None)
+    return int(stack)
 
 def upgrade_skill_processor(upgradeSkillData, skillData: SkillData)-> SkillData:
     """
