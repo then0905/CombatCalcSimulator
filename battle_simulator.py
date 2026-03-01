@@ -2,10 +2,9 @@
 import heapq
 from typing import Dict, Optional, List
 from dataclasses import dataclass, field,fields
-from game_models import GameData, ItemsDic, SkillData, SkillOperationData, MonsterDataModel, MonsterDropItemDataModel, \
+from game_models import GameData, ItemsDic, SkillData, SkillOperationData, MonsterDataModel, \
     ArmorDataModel, WeaponDataModel, ItemDataModel, JobBonusDataModel, StatusFormulaDataModel, GameText, \
-    GameSettingDataModel, AreaData, LvAndExpDataModel,ItemEffectData
-from formula_parser import FormulaParser
+    GameSettingDataModel, AreaData, LvAndExpDataModel, ItemEffectData
 from typing import Tuple
 from commonfunction import clamp, battlelog_text_processor, get_text, get_time_stap
 from skill_processor import (execute_skill_operation, execute_item_operation,
@@ -635,10 +634,8 @@ class BattleCharacter:
         """
         #暴擊率 
         crt_value = self.stats["Crt"]*(self.stats["Crt"] / max(1, self.stats["Crt"] + target.stats["CrtResistance"]))
-        #print(f'>>暴擊率:{self.stats["Crt"] } 暴擊抵抗:{target.stats["CrtResistance"]}')
 
         is_Crt = random.randint(0, 100)
-        #print(f'暴擊率:{crt_value} 暴擊隨機值:{is_Crt}')
 
         #暴擊判定
         return self.AttackCalculator(skill, target, (is_Crt <= crt_value));
@@ -681,32 +678,16 @@ class BattleCharacter:
         #暫存結果
         returnResult = []
 
-        # 實現技能效果
-        parser = FormulaParser()
-        variables = {
-            "attacker_attack": selfATK,  #攻擊者的攻擊力
-            "target_defense": targetDEF,  #受攻擊者防禦
-            "skill_power": skill.Damage,  #傷害倍率
-            "attacker_level": self.level,  #攻擊者等級
-            "target_level": target.level,  #受攻擊者等級
-            "random_factor": random.uniform(0.85, 1.15),
-            "base_damage": skill.Damage
-        }
-        parser.set_variables(variables)
-
         #計算防禦減免
-        defenseRatio = clamp(variables["target_defense"] / (variables["target_defense"] + 9), 0.1, 0.75)
-        # print(f"技能傷害倍率:{skill.Damage}")
+        defenseRatio = clamp(targetDEF / (targetDEF + 9), 0.1, 0.75)
         #計算傷害
         if is_Crt:
-            damage = round(variables["attacker_attack"] * skill.Damage * 1.5) + self.stats["CrtDamage"]
+            damage = round(selfATK * skill.Damage * 1.5) + self.stats["CrtDamage"]
         else:
-            damage = round(variables["attacker_attack"] * skill.Damage)
+            damage = round(selfATK * skill.Damage)
 
         finalDamage = clamp(round(damage * (1 - defenseRatio)) - target.stats["DamageReduction"], 0,
                                            round(damage * (1 - defenseRatio)) - target.stats["DamageReduction"])
-        #print(f"看看 {skill.SkillID} 技能倍率{skill.Damage}")
-        #print(f"攻擊對象:{self.characterType}，攻擊者傷害:{damage}，防禦減免{defenseRatio}，最後傷害{finalDamage}")
 
         #處理額外傷害
         finalDamage = self.BonusDamageCalulator(finalDamage, target)
@@ -846,9 +827,6 @@ class BattleCharacter:
             case _:
                 if hasattr(self.effect, stateType):
                     self._apply_effect(stateType, isRate, value)
-                #else:
-                    #print("未定義的參數:", stateType)
-        #print(f"屬性: {stateType} 增加值:{value} 增加方式: {isRate}")
         # 套完 Effect 重算 stats
         self._recalculate_stats()
         self.character_overview.update_state(self.stats)
@@ -881,8 +859,6 @@ class BattleCharacter:
             name = f.name
             if name != 'HP' and name != 'MP':
                 self.stats[name] = getattr(self.basal, name) + getattr(self.equip, name) + getattr(self.effect, name)
-                #if name == "BlockRate":
-                    #print(f"名稱: {name} 基礎值:{getattr(self.basal, name)} 裝備值: {getattr(self.equip, name)} 效果值: {getattr(self.effect, name)} 總值: {self.stats[name]}")
         # 套 buff 增加的當前 HP/MP
         self.stats["HP"] += self.tempHp
         self.stats["MP"] += self.tempMp
@@ -894,7 +870,6 @@ class BattleSimulator:
         self.gui = gui
         self.battle_log: List[str] = []
         self.damage_data: List[Dict] = []
-        self.skill_usage: Dict[str, int] = {}
         self.update_hp_mp = None  #用來儲存更新雙方血量魔力的匿名方法
         self._after_ids: List = []  # 追蹤所有 tkinter.after 的 ID
         self.is_battling = False  # 戰鬥是否進行中
@@ -1076,31 +1051,46 @@ class BattleSimulator:
 
         return reward, total_attack_timer
 
+    def _init_battle_state(self, player: BattleCharacter, enemy: BattleCharacter):
+        """real-time 與 fast 模式共用的戰鬥初始化"""
+        self.battle_log.clear()
+        self.damage_data.clear()
+        player.skill_usage = {get_text(s.Name): 0 for s in player.skills}
+        enemy.skill_usage = {get_text(s.Name): 0 for s in enemy.skills}
+        player.battle_log = self.battle_log
+        enemy.battle_log = self.battle_log
+        player.run_passive_skill()
+        enemy.run_passive_skill()
+        player.opponent = enemy
+        enemy.opponent = player
+        self.battle_log.extend(player.fire_event_trigger("InCombatStatus", enemy))
+        self.battle_log.extend(enemy.fire_event_trigger("InCombatStatus", player))
+
+    def _record_battle_outcome(self, player: BattleCharacter, enemy: BattleCharacter):
+        """記錄戰鬥結果、顯示日誌、儲存數據、觸發 AI 訓練（real-time 與 fast 共用）"""
+        if player.is_alive():
+            self.battle_log.append(f"{enemy.name} 被擊敗了！{player.name} 獲勝！")
+            self.gui.battle_results.append(True)
+        else:
+            self.battle_log.append(f"{player.name} 被擊敗了！{enemy.name} 獲勝！")
+            self.gui.battle_results.append(False)
+        self.gui.display_battle_log(self.get_battle_log())
+        self.gui.last_battle_data = {
+            "damage": self.get_damage_data(),
+            "player_skill_usage": player.skill_usage,
+            "enemy_skill_usage": enemy.skill_usage,
+            "result": player.is_alive()
+        }
+        player.ai.update_ppo()
+
     def simulate_battle(self, player: BattleCharacter, enemy: BattleCharacter):
         """開啟戰鬥模擬"""
         self.is_battling = True
-        self.battle_log.clear()
-        self.damage_data.clear()
-        player.skill_usage = {get_text(s.Name):0 for s in player.skills}
-        enemy.skill_usage = {get_text(s.Name):0 for s in enemy.skills}
-
-        player.battle_log = self.battle_log
-        enemy.battle_log = self.battle_log
+        self._init_battle_state(player, enemy)
 
         #能力值總覽初始化
         self.gui.player_overview.update_state(player.stats)
         self.gui.enemy_overview.update_state(enemy.stats)
-
-        player.run_passive_skill()
-        enemy.run_passive_skill()
-
-        # 設定對手引用（用於InCombatStatus定期重新觸發）
-        player.opponent = enemy
-        enemy.opponent = player
-
-        # 觸發 InCombatStatus 事件（進入戰鬥）
-        self.battle_log.extend(player.fire_event_trigger("InCombatStatus", enemy))
-        self.battle_log.extend(enemy.fire_event_trigger("InCombatStatus", player))
 
         #匿名方法 更新雙方血量魔力
         def update_hp_mp():
@@ -1131,26 +1121,7 @@ class BattleSimulator:
         進行戰鬥結果確認
         """
         self.is_battling = False
-        if player.is_alive():
-            print(f"{enemy.name} 被擊敗了！{player.name} 獲勝！")
-            self.battle_log.append(f"{enemy.name} 被擊敗了！{player.name} 獲勝！")
-            self.gui.battle_results.append(True)
-        else:
-            print(f"{player.name} 被擊敗了！{enemy.name} 獲勝！")
-            self.battle_log.append(f"{player.name} 被擊敗了！{enemy.name} 獲勝！")
-            self.gui.battle_results.append(False)
-
-        self.gui.display_battle_log(self.get_battle_log())
-        # 保存戰鬥數據用於統計
-        self.gui.last_battle_data = {
-            "damage": self.get_damage_data(),
-            "player_skill_usage": player.skill_usage,
-            "enemy_skill_usage": enemy.skill_usage,
-            "result": player.is_alive()
-        }
-        #AI訓練資料更新
-        player.ai.update_ppo()
-
+        self._record_battle_outcome(player, enemy)
         # 通知 GUI 戰鬥結束（恢復按鈕狀態）
         if hasattr(self.gui, '_on_battle_end'):
             self.gui._on_battle_end()
@@ -1161,15 +1132,9 @@ class BattleSimulator:
 
     def simulate_battle_fast(self, player: BattleCharacter, enemy: BattleCharacter):
         """以離散事件模擬 (DES) 方式瞬間完成整場戰鬥"""
-        self.battle_log.clear()
-        self.damage_data.clear()
-        player.skill_usage = {get_text(s.Name): 0 for s in player.skills}
-        enemy.skill_usage = {get_text(s.Name): 0 for s in enemy.skills}
+        self._init_battle_state(player, enemy)
 
-        player.battle_log = self.battle_log
-        enemy.battle_log = self.battle_log
-
-        # 使用 no-op 的 update_hp_mp（快速模式中不即時更新 GUI）
+        # 快速模式：update_hp_mp 使用 no-op（不即時更新 GUI）
         noop = lambda: None
         self.update_hp_mp = noop
         player.update_hp_mp = noop
@@ -1178,18 +1143,6 @@ class BattleSimulator:
         # 能力值總覽初始化（使用角色自身的 overview，可能是 Dummy）
         player.character_overview.update_state(player.stats)
         enemy.character_overview.update_state(enemy.stats)
-
-        # 執行被動技能
-        player.run_passive_skill()
-        enemy.run_passive_skill()
-
-        # 設定對手引用（用於InCombatStatus定期重新觸發）
-        player.opponent = enemy
-        enemy.opponent = player
-
-        # 觸發 InCombatStatus 事件（進入戰鬥）
-        self.battle_log.extend(player.fire_event_trigger("InCombatStatus", enemy))
-        self.battle_log.extend(enemy.fire_event_trigger("InCombatStatus", player))
 
         # ── 建立優先佇列 ──
         # 事件格式: (time, priority, event_type, data)
@@ -1266,15 +1219,7 @@ class BattleSimulator:
 
     def _finalize_battle_fast(self, player: BattleCharacter, enemy: BattleCharacter):
         """快速戰鬥結束後：記錄結果、更新真實 GUI、觸發 AI 訓練"""
-        if player.is_alive():
-            self.battle_log.append(f"{enemy.name} 被擊敗了！{player.name} 獲勝！")
-            self.gui.battle_results.append(True)
-        else:
-            self.battle_log.append(f"{player.name} 被擊敗了！{enemy.name} 獲勝！")
-            self.gui.battle_results.append(False)
-
-        # 顯示完整戰鬥日誌
-        self.gui.display_battle_log(self.get_battle_log())
+        self._record_battle_outcome(player, enemy)
 
         # 更新真實 GUI 的 HP/MP bar 為最終狀態
         self.gui.player_hp_bar.set_value(player.stats["HP"], player.stats["MaxHP"])
@@ -1284,22 +1229,8 @@ class BattleSimulator:
         self.gui.player_overview.update_state(player.stats)
         self.gui.enemy_overview.update_state(enemy.stats)
 
-        # 保存戰鬥數據
-        self.gui.last_battle_data = {
-            "damage": self.get_damage_data(),
-            "player_skill_usage": player.skill_usage,
-            "enemy_skill_usage": enemy.skill_usage,
-            "result": player.is_alive()
-        }
-
-        # AI 訓練資料更新
-        player.ai.update_ppo()
-
     def get_battle_log(self) -> List[str]:
         return self.battle_log
 
     def get_damage_data(self) -> List[Dict]:
         return self.damage_data
-
-    def get_skill_usage(self) -> Dict[str, int]:
-        return self.skill_usage

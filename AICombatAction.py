@@ -2,10 +2,8 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-import torch.nn.functional as F
 from torch.distributions import Categorical
 import numpy as np
-from collections import defaultdict
 from game_models import GameData
 from skill_processor import skill_all_condition_process
 

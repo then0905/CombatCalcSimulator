@@ -150,8 +150,6 @@ def _execute_component(skillData: SkillData,
 
             case "PassiveBuff":
                 target.add_skill_passive_effect(tempSkillData, op)
-                # target.SkillEffectStatusOperation(
-                # op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
                 temp = f"{get_text('TM_' + op.InfluenceStatus)}: {get_text('TM_' + op.AddType).format(op.EffectValue)}"
                 returnResult.append((battlelog_text_processor({
                     "caster_text": attacker.name,
